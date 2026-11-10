@@ -52,7 +52,12 @@ Configurazione completa con la nomenclatura standard dei tuoi sensori:
 
 ```yaml
 type: custom:fully-sensored-floorplan-card
+title: Planimetria Casa & Clima
 show_climate: true
+home_temperature: sensor.awg_casa_temperatura
+home_humidity: sensor.awg_casa_umidita
+outdoor_temperature: sensor.awg_esterno_temperatura
+outdoor_humidity: sensor.awg_esterno_umidita
 rooms:
   - id: soggiorno
     name: Salone
@@ -67,48 +72,48 @@ rooms:
     window: binary_sensor.finestra_camera_matrimoniale
     shutter: cover.tapparella_camera_matrimoniale
     presence: binary_sensor.presenza_camera_matrimoniale
-    temperature: sensor.temperatura_camera_1
-    humidity: sensor.umidita_camera_1
+    temperature: sensor.awg_camera_da_letto_temperatura
+    humidity: sensor.awg_camera_da_letto_umidita
     air_quality: sensor.qualita_aria_camera_1
   - id: studio
     name: Studio / Garage
     window: ''
     shutter: ''
     presence: binary_sensor.presenza_studio
-    temperature: sensor.temperatura_studio
-    humidity: sensor.umidita_studio
+    temperature: ''
+    humidity: ''
     air_quality: sensor.qualita_aria_studio
   - id: cucina
     name: Studio
     window: binary_sensor.finestra_cucina
     shutter: cover.tapparella_cucina
     presence: binary_sensor.presenza_cucina
-    temperature: sensor.temperatura_cucina
-    humidity: sensor.umidita_cucina
+    temperature: sensor.awg_studio_temperatura
+    humidity: sensor.awg_studio_umidita
     air_quality: sensor.qualita_aria_cucina
   - id: disimpegno
     name: Bagnetto
     window: binary_sensor.finestra_disimpegno
     shutter: cover.tapparella_disimpegno
     presence: binary_sensor.presenza_disimpegno
-    temperature: sensor.temperatura_disimpegno
-    humidity: sensor.umidita_disimpegno
+    temperature: sensor.awg_bagnetto_temperatura
+    humidity: sensor.awg_bagnetto_umidita
     air_quality: sensor.qualita_aria_disimpegno
   - id: bagno_1
     name: Ingresso cucina
     window: ''
     shutter: ''
     presence: binary_sensor.presenza_bagno_1
-    temperature: sensor.temperatura_bagno_1
-    humidity: sensor.umidita_bagno_1
+    temperature: ''
+    humidity: ''
     air_quality: sensor.qualita_aria_bagno_1
   - id: camera_2
     name: Cucina
     window: binary_sensor.finestra_camera_2
     shutter: cover.tapparella_camera_2
     presence: binary_sensor.presenza_camera_2
-    temperature: sensor.temperatura_camera_2
-    humidity: sensor.umidita_camera_2
+    temperature: sensor.awg_cucina_temperatura
+    humidity: sensor.awg_cucina_umidita
     air_quality: sensor.qualita_aria_camera_2
   - id: corridoio
     name: Ingresso
@@ -120,32 +125,32 @@ rooms:
     window: ''
     shutter: ''
     presence: binary_sensor.presenza_ripostiglio
-    temperature: sensor.temperatura_ripostiglio
-    humidity: sensor.umidita_ripostiglio
+    temperature: ''
+    humidity: ''
     air_quality: sensor.qualita_aria_ripostiglio
   - id: bagno_2
     name: Bagno
     window: binary_sensor.finestra_bagno_2
     shutter: cover.tapparella_bagno_2
     presence: binary_sensor.presenza_bagno_2
-    temperature: sensor.temperatura_bagno_2
-    humidity: sensor.umidita_bagno_2
+    temperature: sensor.awg_bagno_temperatura
+    humidity: sensor.awg_bagno_umidita
     air_quality: sensor.qualita_aria_bagno_2
   - id: loggia
     name: Balcone
     window: binary_sensor.finestra_loggia
     shutter: cover.tapparella_loggia
     presence: binary_sensor.presenza_loggia
-    temperature: sensor.temperatura_loggia
-    humidity: sensor.umidita_loggia
+    temperature: sensor.awg_balcone_temperatura
+    humidity: sensor.awg_esterno_umidita
     air_quality: sensor.qualita_aria_loggia
   - id: camera_3
     name: Cameretta
     window: binary_sensor.finestra_camera_3
     shutter: cover.tapparella_camera_3
     presence: binary_sensor.presenza_camera_3
-    temperature: sensor.temperatura_camera_3
-    humidity: sensor.umidita_camera_3
+    temperature: sensor.awg_cameretta_temperatura
+    humidity: sensor.awg_cameretta_umidita
     air_quality: sensor.qualita_aria_camera_3
 ```
 

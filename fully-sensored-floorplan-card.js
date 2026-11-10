@@ -83,8 +83,8 @@
       "window": "binary_sensor.finestra_camera_matrimoniale",
       "shutter": "cover.tapparella_camera_matrimoniale",
       "presence": "binary_sensor.presenza_camera_matrimoniale",
-      "temperature": "sensor.temperatura_camera_1",
-      "humidity": "sensor.umidita_camera_1",
+      "temperature": "sensor.awg_camera_da_letto_temperatura",
+      "humidity": "sensor.awg_camera_da_letto_umidita",
       "air_quality": "sensor.qualita_aria_camera_1"
     },
     "env_defaults": {
@@ -107,13 +107,11 @@
       "window": "",
       "shutter": "",
       "presence": "binary_sensor.presenza_studio",
-      "temperature": "sensor.temperatura_studio",
-      "humidity": "sensor.umidita_studio",
+      "temperature": "",
+      "humidity": "",
       "air_quality": "sensor.qualita_aria_studio"
     },
     "env_defaults": {
-      "temp": 18.5,
-      "humidity": 58,
       "air_quality": "good"
     }
   },
@@ -145,8 +143,8 @@
       "window": "binary_sensor.finestra_cucina",
       "shutter": "cover.tapparella_cucina",
       "presence": "binary_sensor.presenza_cucina",
-      "temperature": "sensor.temperatura_cucina",
-      "humidity": "sensor.umidita_cucina",
+      "temperature": "sensor.awg_studio_temperatura",
+      "humidity": "sensor.awg_studio_umidita",
       "air_quality": "sensor.qualita_aria_cucina"
     },
     "env_defaults": {
@@ -183,13 +181,13 @@
       "window": "binary_sensor.finestra_disimpegno",
       "shutter": "cover.tapparella_disimpegno",
       "presence": "binary_sensor.presenza_disimpegno",
-      "temperature": "sensor.temperatura_disimpegno",
-      "humidity": "sensor.umidita_disimpegno",
+      "temperature": "sensor.awg_bagnetto_temperatura",
+      "humidity": "sensor.awg_bagnetto_umidita",
       "air_quality": "sensor.qualita_aria_disimpegno"
     },
     "env_defaults": {
       "temp": 22.0,
-      "humidity": 60,
+      "humidity": 55,
       "air_quality": "good"
     }
   },
@@ -207,13 +205,11 @@
       "window": "",
       "shutter": "",
       "presence": "binary_sensor.presenza_bagno_1",
-      "temperature": "sensor.temperatura_bagno_1",
-      "humidity": "sensor.umidita_bagno_1",
+      "temperature": "",
+      "humidity": "",
       "air_quality": "sensor.qualita_aria_bagno_1"
     },
     "env_defaults": {
-      "temp": 20.5,
-      "humidity": 50,
       "air_quality": "good"
     }
   },
@@ -245,13 +241,13 @@
       "window": "binary_sensor.finestra_camera_2",
       "shutter": "cover.tapparella_camera_2",
       "presence": "binary_sensor.presenza_camera_2",
-      "temperature": "sensor.temperatura_camera_2",
-      "humidity": "sensor.umidita_camera_2",
+      "temperature": "sensor.awg_cucina_temperatura",
+      "humidity": "sensor.awg_cucina_umidita",
       "air_quality": "sensor.qualita_aria_camera_2"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 55,
+      "temp": 20.5,
+      "humidity": 50,
       "air_quality": "good"
     }
   },
@@ -274,8 +270,8 @@
       "air_quality": ""
     },
     "env_defaults": {
-      "temp": 20.0,
-      "humidity": 48,
+      "temp": 21.2,
+      "humidity": 47,
       "air_quality": "good"
     }
   },
@@ -293,13 +289,11 @@
       "window": "",
       "shutter": "",
       "presence": "binary_sensor.presenza_ripostiglio",
-      "temperature": "sensor.temperatura_ripostiglio",
-      "humidity": "sensor.umidita_ripostiglio",
+      "temperature": "",
+      "humidity": "",
       "air_quality": "sensor.qualita_aria_ripostiglio"
     },
     "env_defaults": {
-      "temp": 20.4,
-      "humidity": 51,
       "air_quality": "good"
     }
   },
@@ -331,13 +325,13 @@
       "window": "binary_sensor.finestra_bagno_2",
       "shutter": "cover.tapparella_bagno_2",
       "presence": "binary_sensor.presenza_bagno_2",
-      "temperature": "sensor.temperatura_bagno_2",
-      "humidity": "sensor.umidita_bagno_2",
+      "temperature": "sensor.awg_bagno_temperatura",
+      "humidity": "sensor.awg_bagno_umidita",
       "air_quality": "sensor.qualita_aria_bagno_2"
     },
     "env_defaults": {
-      "temp": 23.0,
-      "humidity": 68,
+      "temp": 22.4,
+      "humidity": 58,
       "air_quality": "good"
     }
   },
@@ -369,13 +363,13 @@
       "window": "binary_sensor.finestra_loggia",
       "shutter": "cover.tapparella_loggia",
       "presence": "binary_sensor.presenza_loggia",
-      "temperature": "sensor.temperatura_loggia",
-      "humidity": "sensor.umidita_loggia",
+      "temperature": "sensor.awg_balcone_temperatura",
+      "humidity": "sensor.awg_esterno_umidita",
       "air_quality": "sensor.qualita_aria_loggia"
     },
     "env_defaults": {
-      "temp": 17.5,
-      "humidity": 65,
+      "temp": 16.5,
+      "humidity": 64,
       "air_quality": "good"
     }
   },
@@ -407,8 +401,8 @@
       "window": "binary_sensor.finestra_camera_3",
       "shutter": "cover.tapparella_camera_3",
       "presence": "binary_sensor.presenza_camera_3",
-      "temperature": "sensor.temperatura_camera_3",
-      "humidity": "sensor.umidita_camera_3",
+      "temperature": "sensor.awg_cameretta_temperatura",
+      "humidity": "sensor.awg_cameretta_umidita",
       "air_quality": "sensor.qualita_aria_camera_3"
     },
     "env_defaults": {
@@ -442,11 +436,15 @@
       this._showClimate = true;
     }
 
-    static getStubConfig() {
+        static getStubConfig() {
       return {
         type: "custom:fully-sensored-floorplan-card",
         title: "Planimetria Casa & Clima",
         show_climate: true,
+        home_temperature: "sensor.awg_casa_temperatura",
+        home_humidity: "sensor.awg_casa_umidita",
+        outdoor_temperature: "sensor.awg_esterno_temperatura",
+        outdoor_humidity: "sensor.awg_esterno_umidita",
         rooms: ROOM_DEFS.map(r => ({
           id: r.id,
           name: r.label,
@@ -597,6 +595,8 @@
               <span class="card-title">${title}</span>
             </div>
             <div class="chips">
+              <span class="chip" id="chip-home" style="display:none;"></span>
+              <span class="chip" id="chip-outdoor" style="display:none;"></span>
               <span class="chip" id="chip-win">0 Finestre</span>
               <span class="chip" id="chip-shut">0 Chiuse</span>
               <span class="chip" id="chip-pres">0 Presenze</span>
@@ -827,29 +827,73 @@
         const aqState = (room.air_quality && this._hass.states[room.air_quality]) ? this._hass.states[room.air_quality].state : null;
 
         const climTxt = this.shadowRoot.getElementById(`clim-txt-${room.id}`);
+        const hasTemp = tempState !== null && tempState !== undefined && tempState !== "";
+        const hasHum = humState !== null && humState !== undefined && humState !== "";
+        const hasAnyClimate = hasTemp || hasHum;
+
         if (climTxt) {
-          const tStr = tempState ? Math.round(parseFloat(tempState)*10)/10 + "°" : "--°";
-          const hStr = humState ? Math.round(parseFloat(humState)) + "%" : "--%";
-          climTxt.textContent = `${tStr} · ${hStr}`;
+          if (hasTemp && hasHum) {
+            const tStr = Math.round(parseFloat(tempState)*10)/10 + "°";
+            const hStr = Math.round(parseFloat(humState)) + "%";
+            climTxt.textContent = `${tStr} • ${hStr}`;
+          } else if (hasTemp) {
+            climTxt.textContent = Math.round(parseFloat(tempState)*10)/10 + "°";
+          } else if (hasHum) {
+            climTxt.textContent = Math.round(parseFloat(humState)) + "%";
+          } else {
+            climTxt.textContent = "";
+          }
         }
 
         const aqDot = this.shadowRoot.getElementById(`aq-dot-${room.id}`);
+        let hasAq = false;
         if (aqDot) {
           const aqInfo = parseAirQuality(aqState);
           if (aqInfo) {
             aqDot.setAttribute("fill", aqInfo.color);
             aqDot.style.display = "block";
+            hasAq = true;
           } else {
-            // If no air quality sensor in room (e.g. corridoio)
-            aqDot.style.display = (room.air_quality && room.air_quality !== "") ? "block" : "none";
+            const hasAqSensor = (room.air_quality && room.air_quality !== "");
+            aqDot.style.display = hasAqSensor ? "block" : "none";
+            hasAq = hasAqSensor;
           }
         }
 
         const climGroup = this.shadowRoot.getElementById("clim-" + room.id);
         if (climGroup) {
-          climGroup.style.display = this._showClimate ? "block" : "none";
+          climGroup.style.display = (this._showClimate && (hasAnyClimate || hasAq)) ? "block" : "none";
         }
       });
+
+      // Global climate chips (Casa / Esterno)
+      const chipHome = this.shadowRoot.getElementById("chip-home");
+      if (chipHome) {
+        const homeTemp = (this._config.home_temperature && this._hass.states[this._config.home_temperature]) ? this._hass.states[this._config.home_temperature].state : null;
+        const homeHum = (this._config.home_humidity && this._hass.states[this._config.home_humidity]) ? this._hass.states[this._config.home_humidity].state : null;
+        if (homeTemp || homeHum) {
+          const tPart = homeTemp ? Math.round(parseFloat(homeTemp)*10)/10 + "°" : "";
+          const hPart = homeHum ? Math.round(parseFloat(homeHum)) + "%" : "";
+          chipHome.textContent = `🏠 Casa: ${[tPart, hPart].filter(Boolean).join(" • ")}`;
+          chipHome.style.display = "inline-block";
+        } else {
+          chipHome.style.display = "none";
+        }
+      }
+
+      const chipOutdoor = this.shadowRoot.getElementById("chip-outdoor");
+      if (chipOutdoor) {
+        const outTemp = (this._config.outdoor_temperature && this._hass.states[this._config.outdoor_temperature]) ? this._hass.states[this._config.outdoor_temperature].state : null;
+        const outHum = (this._config.outdoor_humidity && this._hass.states[this._config.outdoor_humidity]) ? this._hass.states[this._config.outdoor_humidity].state : null;
+        if (outTemp || outHum) {
+          const tPart = outTemp ? Math.round(parseFloat(outTemp)*10)/10 + "°" : "";
+          const hPart = outHum ? Math.round(parseFloat(outHum)) + "%" : "";
+          chipOutdoor.textContent = `🌤️ Esterno: ${[tPart, hPart].filter(Boolean).join(" • ")}`;
+          chipOutdoor.style.display = "inline-block";
+        } else {
+          chipOutdoor.style.display = "none";
+        }
+      }
 
       const chipWin = this.shadowRoot.getElementById("chip-win");
       const chipShut = this.shadowRoot.getElementById("chip-shut");
