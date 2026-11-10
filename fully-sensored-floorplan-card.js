@@ -41,7 +41,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_salone",
+      "window": "binary_sensor.sensore_finestra_salone_contact",
       "shutter": "cover.tapparella_salone",
       "presence": "binary_sensor.presenza_salone",
       "temperature": "sensor.awg_salone_temperatura",
@@ -79,7 +79,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_camera_da_letto",
+      "window": "binary_sensor.sensore_finestra_camera_da_letto_contact",
       "shutter": "cover.tapparella_camera_da_letto",
       "presence": "binary_sensor.presenza_camera_da_letto",
       "temperature": "sensor.awg_camera_da_letto_temperatura",
@@ -139,7 +139,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_studio",
+      "window": "binary_sensor.sensore_portafinestra_studio_contact",
       "shutter": "cover.tapparella_studio",
       "presence": "binary_sensor.presenza_studio",
       "temperature": "sensor.awg_studio_temperatura",
@@ -177,7 +177,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_bagnetto",
+      "window": "binary_sensor.sensore_finestra_bagnetto_contact",
       "shutter": "cover.tapparella_bagnetto",
       "presence": "binary_sensor.presenza_bagnetto",
       "temperature": "sensor.awg_bagnetto_temperatura",
@@ -237,7 +237,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_cucina",
+      "window": "binary_sensor.sensore_portafinestra_cucina_contact",
       "shutter": "cover.tapparella_cucina",
       "presence": "binary_sensor.presenza_cucina",
       "temperature": "sensor.awg_cucina_temperatura",
@@ -266,7 +266,8 @@
       "presence": "binary_sensor.sensore_movimento_ingresso",
       "temperature": "sensor.awg_ingresso_temperatura",
       "humidity": "sensor.awg_ingresso_umidita",
-      "air_quality": ""
+      "air_quality": "",
+      "door": "binary_sensor.sensore_porta_ingresso_contact"
     },
     "env_defaults": {
       "temp": 21.2,
@@ -321,7 +322,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_bagno",
+      "window": "binary_sensor.sensore_finestra_bagno_contact",
       "shutter": "cover.tapparella_bagno",
       "presence": "binary_sensor.presenza_bagno",
       "temperature": "sensor.awg_bagno_temperatura",
@@ -359,7 +360,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_balcone",
+      "window": "binary_sensor.sensore_finestra_balcone_contact",
       "shutter": "cover.tapparella_balcone",
       "presence": "binary_sensor.presenza_balcone",
       "temperature": "sensor.awg_balcone_temperatura",
@@ -397,7 +398,7 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_cameretta",
+      "window": "binary_sensor.sensore_finestra_cameretta_contact, binary_sensor.sensore_portafinestra_cameretta_contact",
       "shutter": "cover.tapparella_cameretta",
       "presence": "binary_sensor.presenza_cameretta",
       "temperature": "sensor.awg_cameretta_temperatura",
@@ -541,12 +542,18 @@
             backdrop-filter: blur(6px);
             transition: all 0.3s ease;
           }
-          .chip.active-win {
-            background: rgba(14, 165, 233, 0.18);
-            border-color: rgba(56, 189, 248, 0.45);
-            color: #38bdf8;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.28);
+          .chip.active-door {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+            color: #f87171;
+            box-shadow: 0 0 14px rgba(239, 68, 68, 0.35);
+            animation: pulse-red 1.8s infinite;
           }
+          @keyframes pulse-red {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.02); }
+          }
+          .chip.active-win {
           .chip.active-shut {
             background: rgba(168, 85, 247, 0.18);
             border-color: rgba(192, 132, 252, 0.45);
@@ -635,6 +642,7 @@
             <div class="chips">
               <span class="chip chip-climate" id="chip-home" style="display:none;"></span>
               <span class="chip chip-climate" id="chip-outdoor" style="display:none;"></span>
+              <span class="chip active-door" id="chip-door" style="display:none;">🚨 Porta Aperta</span>
               <span class="chip" id="chip-win">0 Finestre</span>
               <span class="chip" id="chip-shut">0 Chiuse</span>
               <span class="chip" id="chip-pres">0 Presenze</span>
@@ -906,15 +914,47 @@
       if (!this._hass) return;
 
       const configuredRooms = this._config.rooms || ROOM_DEFS;
-      let winCount = 0, shutCount = 0, presCount = 0;
+      let winCount = 0, shutCount = 0, presCount = 0, doorCount = 0;
 
       configuredRooms.forEach(room => {
         const rDef = ROOM_DEFS.find(x => x.id === room.id) || room;
 
-        // Window state
-        const winEntity = (room.window && room.window !== "") ? this._hass.states[room.window] : null;
-        const isWinOpen = winEntity && (winEntity.state === "on" || winEntity.state === "open");
+        // Window & Contact Sensor state (supports single entity, comma-separated or array)
+        let winEntities = [];
+        if (Array.isArray(room.window)) {
+          winEntities = room.window;
+        } else if (typeof room.window === "string" && room.window.trim() !== "") {
+          winEntities = room.window.split(",").map(s => s.trim());
+        }
+
+        const isWinOpen = winEntities.some(entId => {
+          const ent = this._hass.states[entId];
+          return ent && (ent.state === "on" || ent.state === "open");
+        });
         if (isWinOpen) winCount++;
+
+        // Door contact sensor
+        let doorEntities = [];
+        const doorCfg = room.door || room.entities?.door;
+        if (Array.isArray(doorCfg)) {
+          doorEntities = doorCfg;
+        } else if (typeof doorCfg === "string" && doorCfg.trim() !== "") {
+          doorEntities = doorCfg.split(",").map(s => s.trim());
+        }
+
+        const isDoorOpen = doorEntities.some(entId => {
+          const ent = this._hass.states[entId];
+          return ent && (ent.state === "on" || ent.state === "open");
+        });
+        if (isDoorOpen) {
+          doorCount++;
+          if (poly) {
+            poly.setAttribute("fill", "#ef4444");
+            poly.setAttribute("fill-opacity", "0.25");
+            poly.setAttribute("stroke", "#ef4444");
+            poly.setAttribute("stroke-opacity", "0.9");
+          }
+        }
 
         const poly = this.shadowRoot.getElementById("poly-" + room.id);
         if (poly) {
@@ -1059,6 +1099,16 @@
       if (chipPres) {
         chipPres.textContent = `${presCount} Presenz${presCount === 1 ? 'a' : 'e'}`;
         chipPres.className = `chip ${presCount > 0 ? 'active-pres' : ''}`;
+      }
+
+      const chipDoor = this.shadowRoot.getElementById("chip-door");
+      if (chipDoor) {
+        if (doorCount > 0) {
+          chipDoor.textContent = `🚨 ${doorCount} Port${doorCount === 1 ? 'a Aperta' : 'e Aperte'}`;
+          chipDoor.style.display = "inline-flex";
+        } else {
+          chipDoor.style.display = "none";
+        }
       }
     }
 
