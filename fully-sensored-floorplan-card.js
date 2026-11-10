@@ -615,22 +615,10 @@
             pointer-events: none;
             z-index: 0;
           }
-          .base-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-            z-index: 1;
-            filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.7));
-          }
           svg {
-            position: absolute;
-            inset: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
+            display: block;
           }
           .room-poly {
             cursor: pointer;
@@ -675,7 +663,6 @@
           </div>
 
           <div class="viewport">
-            <img class="base-img" src="${BASE_IMAGE}" alt="Planimetria">
             <svg id="svg-layer" viewBox="0 0 1024 711"></svg>
           </div>
         </ha-card>
@@ -731,6 +718,7 @@
 
       svg.innerHTML = `
         ${defsHtml}
+        <image id="svg-walls-img" href="${BASE_IMAGE}" x="0" y="0" width="1024" height="711" preserveAspectRatio="none" style="pointer-events: none; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.65));" />
         <g id="g-room-bases"></g>
         <g id="g-room-fills"></g>
         <g id="g-presence-glow"></g>
@@ -760,8 +748,8 @@
         // 1. Room Base Floor (subtle sleek charcoal)
         const basePoly = document.createElementNS("http://www.w3.org/2000/svg", "path");
         basePoly.setAttribute("d", r.path);
-        basePoly.setAttribute("fill", "rgba(30, 41, 59, 0.45)");
-        basePoly.setAttribute("stroke", "rgba(148, 163, 184, 0.12)");
+        basePoly.setAttribute("fill", "rgba(255, 255, 255, 0.01)");
+        basePoly.setAttribute("stroke", "transparent");
         basePoly.setAttribute("stroke-width", "1");
         basePoly.setAttribute("class", "room-poly");
         basePoly.addEventListener("click", () => this._handleRoomClick(room));
