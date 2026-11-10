@@ -389,7 +389,7 @@
     const ROOMS = [
   {
     "id": "soggiorno",
-    "label": "Soggiorno / Living",
+    "label": "Salone",
     "icon": "mdi:sofa",
     "comp": 2,
     "path": "M 40,20 L 648,20 L 648,281 L 70,281 L 27,281 L 27,60 L 40,20 Z",
@@ -415,19 +415,19 @@
       "window": "binary_sensor.finestra_soggiorno",
       "shutter": "cover.tapparella_soggiorno",
       "presence": "binary_sensor.presenza_soggiorno",
-      "temperature": "sensor.temperatura_soggiorno",
-      "humidity": "sensor.umidita_soggiorno",
-      "air_quality": "sensor.qualita_aria_soggiorno"
+      "temperature": "sensor.awg_salone_temperatura",
+      "humidity": "sensor.awg_salone_umidita",
+      "air_quality": "sensor.purificatore_xiaomi_pm25"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
-      "air_quality": "good"
+      "temp": 21.8,
+      "humidity": 48,
+      "air_quality": "11"
     }
   },
   {
     "id": "camera_1",
-    "label": "Camera Matrimoniale",
+    "label": "Camera da letto",
     "icon": "mdi:bed-king",
     "comp": 3,
     "path": "M 655,20 L 980,20 L 995,35 L 995,268 L 655,268 Z",
@@ -458,15 +458,15 @@
       "air_quality": "sensor.qualita_aria_camera_1"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 20.2,
+      "humidity": 52,
       "air_quality": "good"
     }
   },
   {
     "id": "studio",
     "label": "Studio / Garage",
-    "icon": "mdi:desk",
+    "icon": "mdi:garage",
     "comp": 9,
     "path": "M 17,285 L 228,285 L 228,690 L 17,690 Z",
     "cx": 122,
@@ -482,15 +482,15 @@
       "air_quality": "sensor.qualita_aria_studio"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 18.5,
+      "humidity": 58,
       "air_quality": "good"
     }
   },
   {
     "id": "cucina",
-    "label": "Cucina / Pranzo",
-    "icon": "mdi:silverware-fork-knife",
+    "label": "Studio",
+    "icon": "mdi:desk",
     "comp": 5,
     "path": "M 236,276 L 528,276 L 528,418 L 236,418 Z",
     "cx": 382,
@@ -520,15 +520,15 @@
       "air_quality": "sensor.qualita_aria_cucina"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 21.0,
+      "humidity": 49,
       "air_quality": "good"
     }
   },
   {
     "id": "disimpegno",
-    "label": "Disimpegno SX",
-    "icon": "mdi:door",
+    "label": "Bagnetto",
+    "icon": "mdi:toilet",
     "comp": 11,
     "path": "M 236,425 L 448,425 L 448,506 L 236,506 Z",
     "cx": 342,
@@ -558,15 +558,15 @@
       "air_quality": "sensor.qualita_aria_disimpegno"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 22.0,
+      "humidity": 60,
       "air_quality": "good"
     }
   },
   {
     "id": "bagno_1",
-    "label": "Bagno Notte",
-    "icon": "mdi:shower",
+    "label": "Ingresso cucina",
+    "icon": "mdi:door",
     "comp": 12,
     "path": "M 456,425 L 528,425 L 528,506 L 456,506 Z",
     "cx": 492,
@@ -582,15 +582,15 @@
       "air_quality": "sensor.qualita_aria_bagno_1"
     },
     "env_defaults": {
-      "temp": 23.0,
-      "humidity": 65,
+      "temp": 20.5,
+      "humidity": 50,
       "air_quality": "good"
     }
   },
   {
     "id": "camera_2",
-    "label": "Camera 2",
-    "icon": "mdi:bed",
+    "label": "Cucina",
+    "icon": "mdi:silverware-fork-knife",
     "comp": 13,
     "path": "M 236,514 L 528,514 L 528,688 L 236,688 Z",
     "cx": 382,
@@ -621,14 +621,14 @@
     },
     "env_defaults": {
       "temp": 21.5,
-      "humidity": 50,
+      "humidity": 55,
       "air_quality": "good"
     }
   },
   {
     "id": "corridoio",
-    "label": "Corridoio Centrale",
-    "icon": "mdi:transit-connection-variant",
+    "label": "Ingresso",
+    "icon": "mdi:door-open",
     "comp": 6,
     "path": "M 536,276 L 648,276 L 648,617 L 536,617 Z",
     "cx": 592,
@@ -638,21 +638,21 @@
     "entities": {
       "window": "",
       "shutter": "",
-      "presence": "binary_sensor.presenza_corridoio",
-      "temperature": "sensor.temperatura_corridoio",
-      "humidity": "sensor.umidita_corridoio",
-      "air_quality": "sensor.qualita_aria_corridoio"
+      "presence": "binary_sensor.sensore_movimento_ingresso",
+      "temperature": "sensor.awg_ingresso_temperatura",
+      "humidity": "sensor.awg_ingresso_umidita",
+      "air_quality": ""
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 20.0,
+      "humidity": 48,
       "air_quality": "good"
     }
   },
   {
     "id": "ripostiglio",
-    "label": "Ripostiglio",
-    "icon": "mdi:wardrobe",
+    "label": "Ingresso Camere",
+    "icon": "mdi:transit-connection-variant",
     "comp": 7,
     "path": "M 655,276 L 727,276 L 727,390 L 655,390 Z",
     "cx": 691,
@@ -668,15 +668,15 @@
       "air_quality": "sensor.qualita_aria_ripostiglio"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 20.4,
+      "humidity": 51,
       "air_quality": "good"
     }
   },
   {
     "id": "bagno_2",
-    "label": "Bagno 2 (Giorno)",
-    "icon": "mdi:toilet",
+    "label": "Bagno",
+    "icon": "mdi:shower",
     "comp": 8,
     "path": "M 735,276 L 908,276 L 908,390 L 735,390 Z",
     "cx": 821,
@@ -707,13 +707,13 @@
     },
     "env_defaults": {
       "temp": 23.0,
-      "humidity": 65,
+      "humidity": 68,
       "air_quality": "good"
     }
   },
   {
     "id": "loggia",
-    "label": "Loggia / Balcone",
+    "label": "Balcone",
     "icon": "mdi:balcony",
     "comp": 4,
     "path": "M 915,271 L 1005,271 L 1005,429 L 915,429 Z",
@@ -744,15 +744,15 @@
       "air_quality": "sensor.qualita_aria_loggia"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 17.5,
+      "humidity": 65,
       "air_quality": "good"
     }
   },
   {
     "id": "camera_3",
-    "label": "Camera 3 (Ospiti)",
-    "icon": "mdi:bed-outline",
+    "label": "Cameretta",
+    "icon": "mdi:bed",
     "comp": 10,
     "path": "M 655,398 L 995,398 L 995,617 L 655,617 Z",
     "cx": 825,
@@ -782,8 +782,8 @@
       "air_quality": "sensor.qualita_aria_camera_3"
     },
     "env_defaults": {
-      "temp": 21.5,
-      "humidity": 50,
+      "temp": 20.8,
+      "humidity": 51,
       "air_quality": "good"
     }
   }

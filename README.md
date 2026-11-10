@@ -17,7 +17,7 @@ Per ciascuna stanza della planimetria, la card monitora 6 parametri in tempo rea
 3. 👤 **Presenza** (`binary_sensor`): animazione **radar pulsante arancione** con indicatore centrale al rilevamento di una persona.
 4. 🌡️ **Temperatura** (`sensor`): mostrata nel badge climatico della stanza (°C).
 5. 💧 **Umidità** (`sensor`): mostrata nel badge climatico della stanza (%).
-6. 🍃 **Qualità dell'aria** (`sensor`): semaforo integrato nel badge (🟢 Buona / 🟡 Moderata / 🔴 Scarsa).
+6. 🍃 **Qualità dell'aria** (`sensor`): semaforo integrato nel badge (🟢 Buona / 🟡 Moderata / 🔴 Scarsa). Supporta sia indici testuali che valori numerici PM2.5 (es. Xiaomi Purifier PM2.5).
 
 Inoltre:
 - **Badge Ambientale a scomparsa**: pulsante rapido per mostrare o nascondere i valori di clima con un click.
@@ -48,60 +48,125 @@ Inoltre:
 
 ## ⚙️ Configurazione Lovelace
 
-Aggiungi una card di tipo **Manuale** nella tua dashboard con il seguente YAML:
+Configurazione completa con la nomenclatura standard dei tuoi sensori:
 
 ```yaml
 type: custom:fully-sensored-floorplan-card
-title: "Planimetria Casa & Clima"
 show_climate: true
-image: /local/planimetria.png
 rooms:
   - id: soggiorno
-    name: "Soggiorno"
+    name: Salone
     window: binary_sensor.finestra_soggiorno
     shutter: cover.tapparella_soggiorno
     presence: binary_sensor.presenza_soggiorno
-    temperature: sensor.temperatura_soggiorno
-    humidity: sensor.umidita_soggiorno
-    air_quality: sensor.qualita_aria_soggiorno
-
+    temperature: sensor.awg_salone_temperatura
+    humidity: sensor.awg_salone_umidita
+    air_quality: sensor.purificatore_xiaomi_pm25
   - id: camera_1
-    name: "Camera Matrimoniale"
+    name: Camera da letto
     window: binary_sensor.finestra_camera_matrimoniale
     shutter: cover.tapparella_camera_matrimoniale
     presence: binary_sensor.presenza_camera_matrimoniale
-    temperature: sensor.temperatura_camera_matrimoniale
-    humidity: sensor.umidita_camera_matrimoniale
-    air_quality: sensor.qualita_aria_camera_matrimoniale
-
+    temperature: sensor.temperatura_camera_1
+    humidity: sensor.umidita_camera_1
+    air_quality: sensor.qualita_aria_camera_1
+  - id: studio
+    name: Studio / Garage
+    window: ''
+    shutter: ''
+    presence: binary_sensor.presenza_studio
+    temperature: sensor.temperatura_studio
+    humidity: sensor.umidita_studio
+    air_quality: sensor.qualita_aria_studio
   - id: cucina
-    name: "Cucina"
+    name: Studio
     window: binary_sensor.finestra_cucina
     shutter: cover.tapparella_cucina
     presence: binary_sensor.presenza_cucina
     temperature: sensor.temperatura_cucina
     humidity: sensor.umidita_cucina
     air_quality: sensor.qualita_aria_cucina
+  - id: disimpegno
+    name: Bagnetto
+    window: binary_sensor.finestra_disimpegno
+    shutter: cover.tapparella_disimpegno
+    presence: binary_sensor.presenza_disimpegno
+    temperature: sensor.temperatura_disimpegno
+    humidity: sensor.umidita_disimpegno
+    air_quality: sensor.qualita_aria_disimpegno
+  - id: bagno_1
+    name: Ingresso cucina
+    window: ''
+    shutter: ''
+    presence: binary_sensor.presenza_bagno_1
+    temperature: sensor.temperatura_bagno_1
+    humidity: sensor.umidita_bagno_1
+    air_quality: sensor.qualita_aria_bagno_1
+  - id: camera_2
+    name: Cucina
+    window: binary_sensor.finestra_camera_2
+    shutter: cover.tapparella_camera_2
+    presence: binary_sensor.presenza_camera_2
+    temperature: sensor.temperatura_camera_2
+    humidity: sensor.umidita_camera_2
+    air_quality: sensor.qualita_aria_camera_2
+  - id: corridoio
+    name: Ingresso
+    presence: binary_sensor.sensore_movimento_ingresso
+    temperature: sensor.awg_ingresso_temperatura
+    humidity: sensor.awg_ingresso_umidita
+  - id: ripostiglio
+    name: Ingresso Camere
+    window: ''
+    shutter: ''
+    presence: binary_sensor.presenza_ripostiglio
+    temperature: sensor.temperatura_ripostiglio
+    humidity: sensor.umidita_ripostiglio
+    air_quality: sensor.qualita_aria_ripostiglio
+  - id: bagno_2
+    name: Bagno
+    window: binary_sensor.finestra_bagno_2
+    shutter: cover.tapparella_bagno_2
+    presence: binary_sensor.presenza_bagno_2
+    temperature: sensor.temperatura_bagno_2
+    humidity: sensor.umidita_bagno_2
+    air_quality: sensor.qualita_aria_bagno_2
+  - id: loggia
+    name: Balcone
+    window: binary_sensor.finestra_loggia
+    shutter: cover.tapparella_loggia
+    presence: binary_sensor.presenza_loggia
+    temperature: sensor.temperatura_loggia
+    humidity: sensor.umidita_loggia
+    air_quality: sensor.qualita_aria_loggia
+  - id: camera_3
+    name: Cameretta
+    window: binary_sensor.finestra_camera_3
+    shutter: cover.tapparella_camera_3
+    presence: binary_sensor.presenza_camera_3
+    temperature: sensor.temperatura_camera_3
+    humidity: sensor.umidita_camera_3
+    air_quality: sensor.qualita_aria_camera_3
 ```
 
 ---
 
-## 🗺️ ID Stanze Mappate
+## 🗺️ Mappatura Stanze e ID
 
-| ID Stanza | Descrizione |
-|---|---|
-| `soggiorno` | Salone / Living (Superiore SX) |
-| `camera_1` | Camera Padronale (Superiore DX) |
-| `studio` | Studio / Garage (Inferiore SX) |
-| `cucina` | Cucina / Pranzo |
-| `disimpegno` | Disimpegno Notte SX |
-| `bagno_1` | Bagno SX |
-| `camera_2` | Camera 2 (Inferiore Centro-SX) |
-| `corridoio` | Corridoio Centrale |
-| `ripostiglio` | Ripostiglio / Antibagno |
-| `bagno_2` | Bagno DX |
-| `loggia` | Balcone / Loggia DX |
-| `camera_3` | Camera 3 / Salotto DX (Inferiore DX) |
+| ID Stanza | Nome Stanza Utente | Sensori Principali |
+|---|---|---|
+| `soggiorno` | **Salone** | Finestra, Tapparella, Presenza, Temp/Umid AWG, PM2.5 Xiaomi Purifier |
+| `camera_1` | **Camera da letto** | Finestra, Tapparella, Presenza, Clima Camera 1 |
+| `studio` | **Studio / Garage** | Presenza, Clima Studio |
+| `cucina` | **Studio** | Finestra, Tapparella, Presenza, Clima Cucina/Studio |
+| `disimpegno` | **Bagnetto** | Finestra, Tapparella, Presenza, Clima Bagnetto |
+| `bagno_1` | **Ingresso cucina** | Presenza, Clima Ingresso Cucina |
+| `camera_2` | **Cucina** | Finestra, Tapparella, Presenza, Clima Cucina |
+| `corridoio` | **Ingresso** | Sensore Movimento Ingresso, Temp/Umid AWG |
+| `ripostiglio` | **Ingresso Camere** | Presenza, Clima Ingresso Camere |
+| `bagno_2` | **Bagno** | Finestra, Tapparella, Presenza, Clima Bagno |
+| `loggia` | **Balcone** | Finestra, Tapparella, Presenza, Clima Balcone |
+| `camera_3` | **Cameretta** | Finestra, Tapparella, Presenza, Clima Cameretta |
 
 ---
 
