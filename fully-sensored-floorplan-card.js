@@ -17,10 +17,25 @@
 
   const ROOM_DEFS = [
   {
-    "id": "soggiorno",
+    "id": "salone",
+    "aliases": [
+      "soggiorno"
+    ],
     "label": "Salone",
     "icon": "\ud83d\udecb\ufe0f",
-    "comp": 2,
+    "entities": {
+      "window": "binary_sensor.finestra_salone",
+      "shutter": "cover.tapparella_salone",
+      "presence": "binary_sensor.presenza_salone",
+      "temperature": "sensor.awg_salone_temperatura",
+      "humidity": "sensor.awg_salone_umidita",
+      "air_quality": "sensor.purificatore_xiaomi_pm25"
+    },
+    "env_defaults": {
+      "temp": 21.8,
+      "humidity": 48,
+      "air_quality": "11"
+    },
     "path": "M 40,20 L 648,20 L 648,281 L 70,281 L 27,281 L 27,60 L 40,20 Z",
     "cx": 337,
     "cy": 145,
@@ -39,26 +54,29 @@
         "w": 7,
         "h": 171
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_finestra_salone_contact",
-      "shutter": "cover.tapparella_salone",
-      "presence": "binary_sensor.presenza_salone",
-      "temperature": "sensor.awg_salone_temperatura",
-      "humidity": "sensor.awg_salone_umidita",
-      "air_quality": "sensor.purificatore_xiaomi_pm25"
-    },
-    "env_defaults": {
-      "temp": 21.8,
-      "humidity": 48,
-      "air_quality": "11"
-    }
+    ]
   },
   {
-    "id": "camera_1",
+    "id": "camera_da_letto",
+    "aliases": [
+      "camera_1",
+      "camera_matrimoniale"
+    ],
     "label": "Camera da letto",
     "icon": "\ud83d\udecf\ufe0f",
-    "comp": 3,
+    "entities": {
+      "window": "binary_sensor.finestra_camera_da_letto",
+      "shutter": "cover.tapparella_camera_da_letto",
+      "presence": "binary_sensor.presenza_camera_da_letto",
+      "temperature": "sensor.awg_camera_da_letto_temperatura",
+      "humidity": "sensor.awg_camera_da_letto_umidita",
+      "air_quality": "sensor.qualita_aria_camera_da_letto"
+    },
+    "env_defaults": {
+      "temp": 20.2,
+      "humidity": 52,
+      "air_quality": "good"
+    },
     "path": "M 655,20 L 980,20 L 995,35 L 995,268 L 655,268 Z",
     "cx": 825,
     "cy": 143,
@@ -77,48 +95,51 @@
         "w": 7,
         "h": 140
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_finestra_camera_da_letto_contact",
-      "shutter": "cover.tapparella_camera_da_letto",
-      "presence": "binary_sensor.presenza_camera_da_letto",
-      "temperature": "sensor.awg_camera_da_letto_temperatura",
-      "humidity": "sensor.awg_camera_da_letto_umidita",
-      "air_quality": "sensor.qualita_aria_camera_1"
-    },
-    "env_defaults": {
-      "temp": 20.2,
-      "humidity": 52,
-      "air_quality": "good"
-    }
+    ]
   },
   {
-    "id": "studio",
+    "id": "garage",
+    "aliases": [
+      "studio",
+      "studio_garage"
+    ],
     "label": "Studio / Garage",
     "icon": "\ud83d\udce6",
-    "comp": 9,
+    "entities": {
+      "window": "",
+      "shutter": "",
+      "presence": "binary_sensor.presenza_garage",
+      "temperature": "",
+      "humidity": "",
+      "air_quality": ""
+    },
+    "env_defaults": {},
     "path": "M 17,285 L 228,285 L 228,690 L 17,690 Z",
     "cx": 122,
     "cy": 488,
     "windows": [],
-    "shutters": [],
+    "shutters": []
+  },
+  {
+    "id": "studio",
+    "aliases": [
+      "cucina"
+    ],
+    "label": "Studio",
+    "icon": "\ud83d\udcbb",
     "entities": {
-      "window": "",
-      "shutter": "",
+      "window": "binary_sensor.finestra_studio",
+      "shutter": "cover.tapparella_studio",
       "presence": "binary_sensor.presenza_studio",
-      "temperature": "",
-      "humidity": "",
+      "temperature": "sensor.awg_studio_temperatura",
+      "humidity": "sensor.awg_studio_umidita",
       "air_quality": "sensor.qualita_aria_studio"
     },
     "env_defaults": {
+      "temp": 21.0,
+      "humidity": 49,
       "air_quality": "good"
-    }
-  },
-  {
-    "id": "cucina",
-    "label": "Studio",
-    "icon": "\ud83d\udcbb",
-    "comp": 5,
+    },
     "path": "M 236,276 L 528,276 L 528,418 L 236,418 Z",
     "cx": 382,
     "cy": 347,
@@ -137,26 +158,28 @@
         "w": 7,
         "h": 84
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_portafinestra_studio_contact",
-      "shutter": "cover.tapparella_studio",
-      "presence": "binary_sensor.presenza_studio",
-      "temperature": "sensor.awg_studio_temperatura",
-      "humidity": "sensor.awg_studio_umidita",
-      "air_quality": "sensor.qualita_aria_cucina"
-    },
-    "env_defaults": {
-      "temp": 21.0,
-      "humidity": 49,
-      "air_quality": "good"
-    }
+    ]
   },
   {
-    "id": "disimpegno",
+    "id": "bagnetto",
+    "aliases": [
+      "disimpegno"
+    ],
     "label": "Bagnetto",
     "icon": "\ud83d\udebf",
-    "comp": 11,
+    "entities": {
+      "window": "binary_sensor.finestra_bagnetto",
+      "shutter": "cover.tapparella_bagnetto",
+      "presence": "binary_sensor.presenza_bagnetto",
+      "temperature": "sensor.awg_bagnetto_temperatura",
+      "humidity": "sensor.awg_bagnetto_umidita",
+      "air_quality": "sensor.qualita_aria_bagnetto"
+    },
+    "env_defaults": {
+      "temp": 22.0,
+      "humidity": 55,
+      "air_quality": "good"
+    },
     "path": "M 236,425 L 448,425 L 448,506 L 236,506 Z",
     "cx": 342,
     "cy": 465,
@@ -175,48 +198,50 @@
         "w": 7,
         "h": 61
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_finestra_bagnetto_contact",
-      "shutter": "cover.tapparella_bagnetto",
-      "presence": "binary_sensor.presenza_bagnetto",
-      "temperature": "sensor.awg_bagnetto_temperatura",
-      "humidity": "sensor.awg_bagnetto_umidita",
-      "air_quality": "sensor.qualita_aria_disimpegno"
-    },
-    "env_defaults": {
-      "temp": 22.0,
-      "humidity": 55,
-      "air_quality": "good"
-    }
+    ]
   },
   {
-    "id": "bagno_1",
+    "id": "ingresso_cucina",
+    "aliases": [
+      "bagno_1"
+    ],
     "label": "Ingresso cucina",
     "icon": "\ud83d\udeaa",
-    "comp": 12,
+    "entities": {
+      "window": "",
+      "shutter": "",
+      "presence": "binary_sensor.presenza_ingresso_cucina",
+      "temperature": "",
+      "humidity": "",
+      "air_quality": ""
+    },
+    "env_defaults": {},
     "path": "M 456,425 L 528,425 L 528,506 L 456,506 Z",
     "cx": 492,
     "cy": 465,
     "windows": [],
-    "shutters": [],
-    "entities": {
-      "window": "",
-      "shutter": "",
-      "presence": "binary_sensor.presenza_bagno_1",
-      "temperature": "",
-      "humidity": "",
-      "air_quality": "sensor.qualita_aria_bagno_1"
-    },
-    "env_defaults": {
-      "air_quality": "good"
-    }
+    "shutters": []
   },
   {
-    "id": "camera_2",
+    "id": "cucina",
+    "aliases": [
+      "camera_2"
+    ],
     "label": "Cucina",
     "icon": "\ud83c\udf73",
-    "comp": 13,
+    "entities": {
+      "window": "binary_sensor.finestra_cucina",
+      "shutter": "cover.tapparella_cucina",
+      "presence": "binary_sensor.presenza_cucina",
+      "temperature": "sensor.awg_cucina_temperatura",
+      "humidity": "sensor.awg_cucina_umidita",
+      "air_quality": "sensor.qualita_aria_cucina"
+    },
+    "env_defaults": {
+      "temp": 20.5,
+      "humidity": 50,
+      "air_quality": "good"
+    },
     "path": "M 236,514 L 528,514 L 528,688 L 236,688 Z",
     "cx": 382,
     "cy": 601,
@@ -235,73 +260,76 @@
         "w": 7,
         "h": 85
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_portafinestra_cucina_contact",
-      "shutter": "cover.tapparella_cucina",
-      "presence": "binary_sensor.presenza_cucina",
-      "temperature": "sensor.awg_cucina_temperatura",
-      "humidity": "sensor.awg_cucina_umidita",
-      "air_quality": "sensor.qualita_aria_camera_2"
-    },
-    "env_defaults": {
-      "temp": 20.5,
-      "humidity": 50,
-      "air_quality": "good"
-    }
+    ]
   },
   {
-    "id": "corridoio",
+    "id": "ingresso",
+    "aliases": [
+      "corridoio"
+    ],
     "label": "Ingresso",
     "icon": "\ud83d\udd11",
-    "comp": 6,
-    "path": "M 536,276 L 648,276 L 648,617 L 536,617 Z",
-    "cx": 592,
-    "cy": 446,
-    "windows": [],
-    "shutters": [],
     "entities": {
+      "door": "binary_sensor.sensore_porta_ingresso_contact",
       "window": "",
       "shutter": "",
       "presence": "binary_sensor.sensore_movimento_ingresso",
       "temperature": "sensor.awg_ingresso_temperatura",
       "humidity": "sensor.awg_ingresso_umidita",
-      "air_quality": "",
-      "door": "binary_sensor.sensore_porta_ingresso_contact"
+      "air_quality": ""
     },
     "env_defaults": {
       "temp": 21.2,
-      "humidity": 47,
-      "air_quality": "good"
-    }
+      "humidity": 47
+    },
+    "path": "M 536,276 L 648,276 L 648,617 L 536,617 Z",
+    "cx": 592,
+    "cy": 446,
+    "windows": [],
+    "shutters": []
   },
   {
-    "id": "ripostiglio",
+    "id": "ingresso_camere",
+    "aliases": [
+      "ripostiglio"
+    ],
     "label": "Ingresso Camere",
     "icon": "\ud83d\udeaa",
-    "comp": 7,
+    "entities": {
+      "window": "",
+      "shutter": "",
+      "presence": "binary_sensor.presenza_ingresso_camere",
+      "temperature": "",
+      "humidity": "",
+      "air_quality": ""
+    },
+    "env_defaults": {},
     "path": "M 655,276 L 727,276 L 727,390 L 655,390 Z",
     "cx": 691,
     "cy": 333,
     "windows": [],
-    "shutters": [],
-    "entities": {
-      "window": "",
-      "shutter": "",
-      "presence": "binary_sensor.presenza_ripostiglio",
-      "temperature": "",
-      "humidity": "",
-      "air_quality": "sensor.qualita_aria_ripostiglio"
-    },
-    "env_defaults": {
-      "air_quality": "good"
-    }
+    "shutters": []
   },
   {
-    "id": "bagno_2",
+    "id": "bagno",
+    "aliases": [
+      "bagno_2"
+    ],
     "label": "Bagno",
     "icon": "\ud83d\udec1",
-    "comp": 8,
+    "entities": {
+      "window": "binary_sensor.finestra_bagno",
+      "shutter": "cover.tapparella_bagno",
+      "presence": "binary_sensor.presenza_bagno",
+      "temperature": "sensor.awg_bagno_temperatura",
+      "humidity": "sensor.awg_bagno_umidita",
+      "air_quality": "sensor.qualita_aria_bagno"
+    },
+    "env_defaults": {
+      "temp": 22.4,
+      "humidity": 58,
+      "air_quality": "good"
+    },
     "path": "M 735,276 L 908,276 L 908,390 L 735,390 Z",
     "cx": 821,
     "cy": 333,
@@ -320,26 +348,28 @@
         "w": 7,
         "h": 61
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_finestra_bagno_contact",
-      "shutter": "cover.tapparella_bagno",
-      "presence": "binary_sensor.presenza_bagno",
-      "temperature": "sensor.awg_bagno_temperatura",
-      "humidity": "sensor.awg_bagno_umidita",
-      "air_quality": "sensor.qualita_aria_bagno_2"
-    },
-    "env_defaults": {
-      "temp": 22.4,
-      "humidity": 58,
-      "air_quality": "good"
-    }
+    ]
   },
   {
-    "id": "loggia",
+    "id": "balcone",
+    "aliases": [
+      "loggia"
+    ],
     "label": "Balcone",
     "icon": "\ud83c\udf3f",
-    "comp": 4,
+    "entities": {
+      "window": "binary_sensor.finestra_balcone",
+      "shutter": "cover.tapparella_balcone",
+      "presence": "binary_sensor.presenza_balcone",
+      "temperature": "sensor.awg_balcone_temperatura",
+      "humidity": "sensor.awg_esterno_umidita",
+      "air_quality": "sensor.qualita_aria_balcone"
+    },
+    "env_defaults": {
+      "temp": 16.5,
+      "humidity": 64,
+      "air_quality": "good"
+    },
     "path": "M 915,271 L 1005,271 L 1005,429 L 915,429 Z",
     "cx": 960,
     "cy": 350,
@@ -358,26 +388,28 @@
         "w": 50,
         "h": 7
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_finestra_balcone_contact",
-      "shutter": "cover.tapparella_balcone",
-      "presence": "binary_sensor.presenza_balcone",
-      "temperature": "sensor.awg_balcone_temperatura",
-      "humidity": "sensor.awg_esterno_umidita",
-      "air_quality": "sensor.qualita_aria_loggia"
-    },
-    "env_defaults": {
-      "temp": 16.5,
-      "humidity": 64,
-      "air_quality": "good"
-    }
+    ]
   },
   {
-    "id": "camera_3",
+    "id": "cameretta",
+    "aliases": [
+      "camera_3"
+    ],
     "label": "Cameretta",
     "icon": "\ud83e\uddf8",
-    "comp": 10,
+    "entities": {
+      "window": "binary_sensor.finestra_cameretta",
+      "shutter": "cover.tapparella_cameretta",
+      "presence": "binary_sensor.presenza_cameretta",
+      "temperature": "sensor.awg_cameretta_temperatura",
+      "humidity": "sensor.awg_cameretta_umidita",
+      "air_quality": "sensor.qualita_aria_cameretta"
+    },
+    "env_defaults": {
+      "temp": 20.8,
+      "humidity": 51,
+      "air_quality": "good"
+    },
     "path": "M 655,398 L 995,398 L 995,617 L 655,617 Z",
     "cx": 825,
     "cy": 508,
@@ -396,20 +428,7 @@
         "w": 7,
         "h": 123
       }
-    ],
-    "entities": {
-      "window": "binary_sensor.sensore_finestra_cameretta_contact, binary_sensor.sensore_portafinestra_cameretta_contact",
-      "shutter": "cover.tapparella_cameretta",
-      "presence": "binary_sensor.presenza_cameretta",
-      "temperature": "sensor.awg_cameretta_temperatura",
-      "humidity": "sensor.awg_cameretta_umidita",
-      "air_quality": "sensor.qualita_aria_camera_3"
-    },
-    "env_defaults": {
-      "temp": 20.8,
-      "humidity": 51,
-      "air_quality": "good"
-    }
+    ]
   }
 ];
 
@@ -427,6 +446,12 @@
     if (["moderate", "moderata", "discreta", "fair"].includes(s)) return { label: "Moderata", status: "Moderata", color: "#f59e0b", bg: "rgba(245, 158, 11, 0.15)" };
     if (["poor", "scadente", "cattiva", "unhealthy"].includes(s)) return { label: "Scadente", status: "Scadente", color: "#ef4444", bg: "rgba(239, 68, 68, 0.18)" };
     return { label: String(val), status: String(val), color: "#38bdf8", bg: "rgba(56, 189, 248, 0.15)" };
+  }
+
+    function findRoomDef(roomId) {
+    if (!roomId) return null;
+    const lower = String(roomId).toLowerCase().trim();
+    return ROOM_DEFS.find(x => x.id === lower || (x.aliases && x.aliases.includes(lower))) || null;
   }
 
   class FullySensoredFloorplanCard extends HTMLElement {
@@ -726,7 +751,8 @@
       const gClim = this.shadowRoot.getElementById("g-climate");
 
       configuredRooms.forEach(room => {
-        const r = ROOM_DEFS.find(x => x.id === room.id) || room;
+        const r = findRoomDef(room.id) || ROOM_DEFS.find(x => x.id === room.id) || room;
+        const canonicalId = r.id || room.id;
         const displayName = room.name || r.label || r.id;
         const icon = r.icon || "🏠";
         const cx = r.cx, cy = r.cy;
@@ -743,7 +769,7 @@
 
         // 2. Room Fill (Active when window opens -> cyan airflow)
         const poly = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        poly.setAttribute("id", "poly-" + room.id);
+        poly.setAttribute("id", "poly-" + canonicalId);
         poly.setAttribute("d", r.path);
         poly.setAttribute("fill", `url(#win-grad-${room.id})`);
         poly.setAttribute("fill-opacity", "0");
@@ -756,7 +782,7 @@
 
         // 3. Presence Warm Radiant Glow
         const presGlow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        presGlow.setAttribute("id", `pres-glow-${room.id}`);
+        presGlow.setAttribute("id", `pres-glow-${canonicalId}`);
         presGlow.setAttribute("d", r.path);
         presGlow.setAttribute("fill", `url(#pres-grad-${room.id})`);
         presGlow.setAttribute("opacity", "0");
@@ -767,7 +793,7 @@
         // 4. Windows (Frosted architectural glass + cyan neon glow)
         (r.windows || []).forEach((win, idx) => {
           const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-          rect.setAttribute("id", `window-${room.id}-${idx}`);
+          rect.setAttribute("id", `window-${canonicalId}-${idx}`);
           rect.setAttribute("x", win.x);
           rect.setAttribute("y", win.y);
           rect.setAttribute("width", win.w);
@@ -787,7 +813,7 @@
         // 5. Shutters (Micro-slatted purple shutters + neon glow outside windows)
         (r.shutters || []).forEach((sh, idx) => {
           const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-          rect.setAttribute("id", `shutter-${room.id}-${idx}`);
+          rect.setAttribute("id", `shutter-${canonicalId}-${idx}`);
           rect.setAttribute("x", sh.x);
           rect.setAttribute("y", sh.y);
           rect.setAttribute("width", sh.w);
@@ -806,7 +832,7 @@
 
         // 6. Presence Beacon (Animated ripple ring + golden person badge)
         const bG = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        bG.setAttribute("id", "pres-" + room.id);
+        bG.setAttribute("id", "pres-" + canonicalId);
         bG.setAttribute("opacity", "0");
         bG.style.pointerEvents = "none";
         bG.style.transition = "opacity 0.4s ease";
@@ -869,13 +895,13 @@
 
         // 8. Climate Glassmorphic Pill at (cx, cy + 14)
         const cG = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        cG.setAttribute("id", "clim-" + room.id);
+        cG.setAttribute("id", "clim-" + canonicalId);
         cG.style.display = "none";
         cG.style.pointerEvents = "none";
 
         const bx = cx - 44, by = cy + 4;
         const bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        bgRect.setAttribute("id", `clim-rect-${room.id}`);
+        bgRect.setAttribute("id", `clim-rect-${canonicalId}`);
         bgRect.setAttribute("x", bx);
         bgRect.setAttribute("y", by);
         bgRect.setAttribute("width", "88");
@@ -889,7 +915,7 @@
         cG.appendChild(bgRect);
 
         const aqDot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        aqDot.setAttribute("id", `aq-dot-${room.id}`);
+        aqDot.setAttribute("id", `aq-dot-${canonicalId}`);
         aqDot.setAttribute("class", "aq-led");
         aqDot.setAttribute("cx", bx + 11);
         aqDot.setAttribute("cy", by + 11);
@@ -898,7 +924,7 @@
         cG.appendChild(aqDot);
 
         const climTxt = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        climTxt.setAttribute("id", `clim-txt-${room.id}`);
+        climTxt.setAttribute("id", `clim-txt-${canonicalId}`);
         climTxt.setAttribute("x", bx + 22);
         climTxt.setAttribute("y", by + 14.5);
         climTxt.setAttribute("font-size", "9.5");
@@ -917,7 +943,8 @@
       let winCount = 0, shutCount = 0, presCount = 0, doorCount = 0;
 
       configuredRooms.forEach(room => {
-        const rDef = ROOM_DEFS.find(x => x.id === room.id) || room;
+        const rDef = findRoomDef(room.id) || ROOM_DEFS.find(x => x.id === room.id) || room;
+        const canonicalId = rDef.id || room.id;
 
         // Window & Contact Sensor state (supports single entity, comma-separated or array)
         let winEntities = [];
@@ -956,14 +983,14 @@
           }
         }
 
-        const poly = this.shadowRoot.getElementById("poly-" + room.id);
+        const poly = this.shadowRoot.getElementById("poly-" + canonicalId) || this.shadowRoot.getElementById("poly-" + room.id);
         if (poly) {
           poly.setAttribute("fill-opacity", isWinOpen ? "0.28" : "0");
           poly.setAttribute("stroke-opacity", isWinOpen ? "0.85" : "0");
         }
 
         (rDef.windows || []).forEach((win, idx) => {
-          const wEl = this.shadowRoot.getElementById(`window-${room.id}-${idx}`);
+          const wEl = this.shadowRoot.getElementById(`window-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`window-${room.id}-${idx}`);
           if (wEl) {
             wEl.setAttribute("fill-opacity", isWinOpen ? "1" : "0");
             wEl.setAttribute("stroke-opacity", isWinOpen ? "1" : "0");
@@ -976,7 +1003,7 @@
         if (isShutClosed) shutCount++;
 
         (rDef.shutters || []).forEach((sh, idx) => {
-          const shEl = this.shadowRoot.getElementById(`shutter-${room.id}-${idx}`);
+          const shEl = this.shadowRoot.getElementById(`shutter-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`shutter-${room.id}-${idx}`);
           if (shEl) {
             shEl.setAttribute("fill-opacity", isShutClosed ? "0.95" : "0");
             shEl.setAttribute("stroke-opacity", isShutClosed ? "1" : "0");
@@ -988,12 +1015,12 @@
         const isPresent = presEntity && (presEntity.state === "on" || presEntity.state === "home");
         if (isPresent) presCount++;
 
-        const presEl = this.shadowRoot.getElementById("pres-" + room.id);
+        const presEl = this.shadowRoot.getElementById("pres-" + canonicalId) || this.shadowRoot.getElementById("pres-" + room.id);
         if (presEl) {
           presEl.setAttribute("opacity", isPresent ? "1" : "0");
         }
 
-        const presGlow = this.shadowRoot.getElementById("pres-glow-" + room.id);
+        const presGlow = this.shadowRoot.getElementById("pres-glow-" + canonicalId) || this.shadowRoot.getElementById("pres-glow-" + room.id);
         if (presGlow) {
           presGlow.setAttribute("opacity", isPresent ? "1" : "0");
         }
@@ -1007,10 +1034,10 @@
         const hasHum = humState !== null && humState !== undefined && humState !== "" && humState !== "unknown" && humState !== "unavailable";
         const hasAnyClimate = hasTemp || hasHum;
 
-        const climTxt = this.shadowRoot.getElementById(`clim-txt-${room.id}`);
-        const aqDot = this.shadowRoot.getElementById(`aq-dot-${room.id}`);
-        const climRect = this.shadowRoot.getElementById(`clim-rect-${room.id}`);
-        const climGroup = this.shadowRoot.getElementById("clim-" + room.id);
+        const climTxt = this.shadowRoot.getElementById(`clim-txt-${canonicalId}`) || this.shadowRoot.getElementById(`clim-txt-${room.id}`);
+        const aqDot = this.shadowRoot.getElementById(`aq-dot-${canonicalId}`) || this.shadowRoot.getElementById(`aq-dot-${room.id}`);
+        const climRect = this.shadowRoot.getElementById(`clim-rect-${canonicalId}`) || this.shadowRoot.getElementById(`clim-rect-${room.id}`);
+        const climGroup = this.shadowRoot.getElementById("clim-" + canonicalId) || this.shadowRoot.getElementById("clim-" + room.id);
 
         let hasAq = false;
         if (aqDot) {

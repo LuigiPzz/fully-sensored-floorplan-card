@@ -59,88 +59,85 @@ home_humidity: sensor.awg_casa_umidita
 outdoor_temperature: sensor.awg_esterno_temperatura
 outdoor_humidity: sensor.awg_esterno_umidita
 rooms:
-  - id: soggiorno
+  - id: salone
     name: Salone
-    window: 'binary_sensor.sensore_finestra_salone_contact'
+    window: 'binary_sensor.finestra_salone'
     shutter: 'cover.tapparella_salone'
     presence: 'binary_sensor.presenza_salone'
     temperature: 'sensor.awg_salone_temperatura'
     humidity: 'sensor.awg_salone_umidita'
     air_quality: 'sensor.purificatore_xiaomi_pm25'
-  - id: camera_1
+  - id: camera_da_letto
     name: Camera da letto
-    window: 'binary_sensor.sensore_finestra_camera_da_letto_contact'
+    window: 'binary_sensor.finestra_camera_da_letto'
     shutter: 'cover.tapparella_camera_da_letto'
     presence: 'binary_sensor.presenza_camera_da_letto'
     temperature: 'sensor.awg_camera_da_letto_temperatura'
     humidity: 'sensor.awg_camera_da_letto_umidita'
-    air_quality: 'sensor.qualita_aria_camera_1'
-  - id: studio
+    air_quality: 'sensor.qualita_aria_camera_da_letto'
+  - id: garage
     name: Studio / Garage
-    presence: 'binary_sensor.presenza_studio'
-    air_quality: 'sensor.qualita_aria_studio'
-  - id: cucina
+    presence: 'binary_sensor.presenza_garage'
+  - id: studio
     name: Studio
-    window: 'binary_sensor.sensore_portafinestra_studio_contact'
+    window: 'binary_sensor.finestra_studio'
     shutter: 'cover.tapparella_studio'
     presence: 'binary_sensor.presenza_studio'
     temperature: 'sensor.awg_studio_temperatura'
     humidity: 'sensor.awg_studio_umidita'
-    air_quality: 'sensor.qualita_aria_cucina'
-  - id: disimpegno
+    air_quality: 'sensor.qualita_aria_studio'
+  - id: bagnetto
     name: Bagnetto
-    window: 'binary_sensor.sensore_finestra_bagnetto_contact'
+    window: 'binary_sensor.finestra_bagnetto'
     shutter: 'cover.tapparella_bagnetto'
     presence: 'binary_sensor.presenza_bagnetto'
     temperature: 'sensor.awg_bagnetto_temperatura'
     humidity: 'sensor.awg_bagnetto_umidita'
-    air_quality: 'sensor.qualita_aria_disimpegno'
-  - id: bagno_1
+    air_quality: 'sensor.qualita_aria_bagnetto'
+  - id: ingresso_cucina
     name: Ingresso cucina
-    presence: 'binary_sensor.presenza_bagno_1'
-    air_quality: 'sensor.qualita_aria_bagno_1'
-  - id: camera_2
+    presence: 'binary_sensor.presenza_ingresso_cucina'
+  - id: cucina
     name: Cucina
-    window: 'binary_sensor.sensore_portafinestra_cucina_contact'
+    window: 'binary_sensor.finestra_cucina'
     shutter: 'cover.tapparella_cucina'
     presence: 'binary_sensor.presenza_cucina'
     temperature: 'sensor.awg_cucina_temperatura'
     humidity: 'sensor.awg_cucina_umidita'
-    air_quality: 'sensor.qualita_aria_camera_2'
-  - id: corridoio
+    air_quality: 'sensor.qualita_aria_cucina'
+  - id: ingresso
     name: Ingresso
     door: 'binary_sensor.sensore_porta_ingresso_contact'
     presence: 'binary_sensor.sensore_movimento_ingresso'
     temperature: 'sensor.awg_ingresso_temperatura'
     humidity: 'sensor.awg_ingresso_umidita'
-  - id: ripostiglio
+  - id: ingresso_camere
     name: Ingresso Camere
-    presence: 'binary_sensor.presenza_ripostiglio'
-    air_quality: 'sensor.qualita_aria_ripostiglio'
-  - id: bagno_2
+    presence: 'binary_sensor.presenza_ingresso_camere'
+  - id: bagno
     name: Bagno
-    window: 'binary_sensor.sensore_finestra_bagno_contact'
+    window: 'binary_sensor.finestra_bagno'
     shutter: 'cover.tapparella_bagno'
     presence: 'binary_sensor.presenza_bagno'
     temperature: 'sensor.awg_bagno_temperatura'
     humidity: 'sensor.awg_bagno_umidita'
-    air_quality: 'sensor.qualita_aria_bagno_2'
-  - id: loggia
+    air_quality: 'sensor.qualita_aria_bagno'
+  - id: balcone
     name: Balcone
-    window: 'binary_sensor.sensore_finestra_balcone_contact'
+    window: 'binary_sensor.finestra_balcone'
     shutter: 'cover.tapparella_balcone'
     presence: 'binary_sensor.presenza_balcone'
     temperature: 'sensor.awg_balcone_temperatura'
     humidity: 'sensor.awg_esterno_umidita'
-    air_quality: 'sensor.qualita_aria_loggia'
-  - id: camera_3
+    air_quality: 'sensor.qualita_aria_balcone'
+  - id: cameretta
     name: Cameretta
-    window: 'binary_sensor.sensore_finestra_cameretta_contact, binary_sensor.sensore_portafinestra_cameretta_contact'
+    window: 'binary_sensor.finestra_cameretta'
     shutter: 'cover.tapparella_cameretta'
     presence: 'binary_sensor.presenza_cameretta'
     temperature: 'sensor.awg_cameretta_temperatura'
     humidity: 'sensor.awg_cameretta_umidita'
-    air_quality: 'sensor.qualita_aria_camera_3'
+    air_quality: 'sensor.qualita_aria_cameretta'
 ```
 
 ---
