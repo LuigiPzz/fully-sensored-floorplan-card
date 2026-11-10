@@ -41,9 +41,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_soggiorno",
-      "shutter": "cover.tapparella_soggiorno",
-      "presence": "binary_sensor.presenza_soggiorno",
+      "window": "binary_sensor.finestra_salone",
+      "shutter": "cover.tapparella_salone",
+      "presence": "binary_sensor.presenza_salone",
       "temperature": "sensor.awg_salone_temperatura",
       "humidity": "sensor.awg_salone_umidita",
       "air_quality": "sensor.purificatore_xiaomi_pm25"
@@ -79,9 +79,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_camera_matrimoniale",
-      "shutter": "cover.tapparella_camera_matrimoniale",
-      "presence": "binary_sensor.presenza_camera_matrimoniale",
+      "window": "binary_sensor.finestra_camera_da_letto",
+      "shutter": "cover.tapparella_camera_da_letto",
+      "presence": "binary_sensor.presenza_camera_da_letto",
       "temperature": "sensor.awg_camera_da_letto_temperatura",
       "humidity": "sensor.awg_camera_da_letto_umidita",
       "air_quality": "sensor.qualita_aria_camera_1"
@@ -139,9 +139,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_cucina",
-      "shutter": "cover.tapparella_cucina",
-      "presence": "binary_sensor.presenza_cucina",
+      "window": "binary_sensor.finestra_studio",
+      "shutter": "cover.tapparella_studio",
+      "presence": "binary_sensor.presenza_studio",
       "temperature": "sensor.awg_studio_temperatura",
       "humidity": "sensor.awg_studio_umidita",
       "air_quality": "sensor.qualita_aria_cucina"
@@ -177,9 +177,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_disimpegno",
-      "shutter": "cover.tapparella_disimpegno",
-      "presence": "binary_sensor.presenza_disimpegno",
+      "window": "binary_sensor.finestra_bagnetto",
+      "shutter": "cover.tapparella_bagnetto",
+      "presence": "binary_sensor.presenza_bagnetto",
       "temperature": "sensor.awg_bagnetto_temperatura",
       "humidity": "sensor.awg_bagnetto_umidita",
       "air_quality": "sensor.qualita_aria_disimpegno"
@@ -237,9 +237,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_camera_2",
-      "shutter": "cover.tapparella_camera_2",
-      "presence": "binary_sensor.presenza_camera_2",
+      "window": "binary_sensor.finestra_cucina",
+      "shutter": "cover.tapparella_cucina",
+      "presence": "binary_sensor.presenza_cucina",
       "temperature": "sensor.awg_cucina_temperatura",
       "humidity": "sensor.awg_cucina_umidita",
       "air_quality": "sensor.qualita_aria_camera_2"
@@ -321,9 +321,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_bagno_2",
-      "shutter": "cover.tapparella_bagno_2",
-      "presence": "binary_sensor.presenza_bagno_2",
+      "window": "binary_sensor.finestra_bagno",
+      "shutter": "cover.tapparella_bagno",
+      "presence": "binary_sensor.presenza_bagno",
       "temperature": "sensor.awg_bagno_temperatura",
       "humidity": "sensor.awg_bagno_umidita",
       "air_quality": "sensor.qualita_aria_bagno_2"
@@ -359,9 +359,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_loggia",
-      "shutter": "cover.tapparella_loggia",
-      "presence": "binary_sensor.presenza_loggia",
+      "window": "binary_sensor.finestra_balcone",
+      "shutter": "cover.tapparella_balcone",
+      "presence": "binary_sensor.presenza_balcone",
       "temperature": "sensor.awg_balcone_temperatura",
       "humidity": "sensor.awg_esterno_umidita",
       "air_quality": "sensor.qualita_aria_loggia"
@@ -397,9 +397,9 @@
       }
     ],
     "entities": {
-      "window": "binary_sensor.finestra_camera_3",
-      "shutter": "cover.tapparella_camera_3",
-      "presence": "binary_sensor.presenza_camera_3",
+      "window": "binary_sensor.finestra_cameretta",
+      "shutter": "cover.tapparella_cameretta",
+      "presence": "binary_sensor.presenza_cameretta",
       "temperature": "sensor.awg_cameretta_temperatura",
       "humidity": "sensor.awg_cameretta_umidita",
       "air_quality": "sensor.qualita_aria_camera_3"

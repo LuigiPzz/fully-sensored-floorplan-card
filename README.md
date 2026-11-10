@@ -61,97 +61,100 @@ outdoor_humidity: sensor.awg_esterno_umidita
 rooms:
   - id: soggiorno
     name: Salone
-    window: binary_sensor.finestra_soggiorno
-    shutter: cover.tapparella_soggiorno
-    presence: binary_sensor.presenza_soggiorno
-    temperature: sensor.awg_salone_temperatura
-    humidity: sensor.awg_salone_umidita
-    air_quality: sensor.purificatore_xiaomi_pm25
+    window: 'binary_sensor.finestra_salone'
+    shutter: 'cover.tapparella_salone'
+    presence: 'binary_sensor.presenza_salone'
+    temperature: 'sensor.awg_salone_temperatura'
+    humidity: 'sensor.awg_salone_umidita'
+    air_quality: 'sensor.purificatore_xiaomi_pm25'
   - id: camera_1
     name: Camera da letto
-    window: binary_sensor.finestra_camera_matrimoniale
-    shutter: cover.tapparella_camera_matrimoniale
-    presence: binary_sensor.presenza_camera_matrimoniale
-    temperature: sensor.awg_camera_da_letto_temperatura
-    humidity: sensor.awg_camera_da_letto_umidita
-    air_quality: sensor.qualita_aria_camera_1
+    window: 'binary_sensor.finestra_camera_da_letto'
+    shutter: 'cover.tapparella_camera_da_letto'
+    presence: 'binary_sensor.presenza_camera_da_letto'
+    temperature: 'sensor.awg_camera_da_letto_temperatura'
+    humidity: 'sensor.awg_camera_da_letto_umidita'
+    air_quality: 'sensor.qualita_aria_camera_1'
   - id: studio
     name: Studio / Garage
     window: ''
     shutter: ''
-    presence: binary_sensor.presenza_studio
+    presence: 'binary_sensor.presenza_studio'
     temperature: ''
     humidity: ''
-    air_quality: sensor.qualita_aria_studio
+    air_quality: 'sensor.qualita_aria_studio'
   - id: cucina
     name: Studio
-    window: binary_sensor.finestra_cucina
-    shutter: cover.tapparella_cucina
-    presence: binary_sensor.presenza_cucina
-    temperature: sensor.awg_studio_temperatura
-    humidity: sensor.awg_studio_umidita
-    air_quality: sensor.qualita_aria_cucina
+    window: 'binary_sensor.finestra_studio'
+    shutter: 'cover.tapparella_studio'
+    presence: 'binary_sensor.presenza_studio'
+    temperature: 'sensor.awg_studio_temperatura'
+    humidity: 'sensor.awg_studio_umidita'
+    air_quality: 'sensor.qualita_aria_cucina'
   - id: disimpegno
     name: Bagnetto
-    window: binary_sensor.finestra_disimpegno
-    shutter: cover.tapparella_disimpegno
-    presence: binary_sensor.presenza_disimpegno
-    temperature: sensor.awg_bagnetto_temperatura
-    humidity: sensor.awg_bagnetto_umidita
-    air_quality: sensor.qualita_aria_disimpegno
+    window: 'binary_sensor.finestra_bagnetto'
+    shutter: 'cover.tapparella_bagnetto'
+    presence: 'binary_sensor.presenza_bagnetto'
+    temperature: 'sensor.awg_bagnetto_temperatura'
+    humidity: 'sensor.awg_bagnetto_umidita'
+    air_quality: 'sensor.qualita_aria_disimpegno'
   - id: bagno_1
     name: Ingresso cucina
     window: ''
     shutter: ''
-    presence: binary_sensor.presenza_bagno_1
+    presence: 'binary_sensor.presenza_bagno_1'
     temperature: ''
     humidity: ''
-    air_quality: sensor.qualita_aria_bagno_1
+    air_quality: 'sensor.qualita_aria_bagno_1'
   - id: camera_2
     name: Cucina
-    window: binary_sensor.finestra_camera_2
-    shutter: cover.tapparella_camera_2
-    presence: binary_sensor.presenza_camera_2
-    temperature: sensor.awg_cucina_temperatura
-    humidity: sensor.awg_cucina_umidita
-    air_quality: sensor.qualita_aria_camera_2
+    window: 'binary_sensor.finestra_cucina'
+    shutter: 'cover.tapparella_cucina'
+    presence: 'binary_sensor.presenza_cucina'
+    temperature: 'sensor.awg_cucina_temperatura'
+    humidity: 'sensor.awg_cucina_umidita'
+    air_quality: 'sensor.qualita_aria_camera_2'
   - id: corridoio
     name: Ingresso
-    presence: binary_sensor.sensore_movimento_ingresso
-    temperature: sensor.awg_ingresso_temperatura
-    humidity: sensor.awg_ingresso_umidita
+    window: ''
+    shutter: ''
+    presence: 'binary_sensor.sensore_movimento_ingresso'
+    temperature: 'sensor.awg_ingresso_temperatura'
+    humidity: 'sensor.awg_ingresso_umidita'
+    air_quality: ''
   - id: ripostiglio
     name: Ingresso Camere
     window: ''
     shutter: ''
-    presence: binary_sensor.presenza_ripostiglio
+    presence: 'binary_sensor.presenza_ripostiglio'
     temperature: ''
     humidity: ''
-    air_quality: sensor.qualita_aria_ripostiglio
+    air_quality: 'sensor.qualita_aria_ripostiglio'
   - id: bagno_2
     name: Bagno
-    window: binary_sensor.finestra_bagno_2
-    shutter: cover.tapparella_bagno_2
-    presence: binary_sensor.presenza_bagno_2
-    temperature: sensor.awg_bagno_temperatura
-    humidity: sensor.awg_bagno_umidita
-    air_quality: sensor.qualita_aria_bagno_2
+    window: 'binary_sensor.finestra_bagno'
+    shutter: 'cover.tapparella_bagno'
+    presence: 'binary_sensor.presenza_bagno'
+    temperature: 'sensor.awg_bagno_temperatura'
+    humidity: 'sensor.awg_bagno_umidita'
+    air_quality: 'sensor.qualita_aria_bagno_2'
   - id: loggia
     name: Balcone
-    window: binary_sensor.finestra_loggia
-    shutter: cover.tapparella_loggia
-    presence: binary_sensor.presenza_loggia
-    temperature: sensor.awg_balcone_temperatura
-    humidity: sensor.awg_esterno_umidita
-    air_quality: sensor.qualita_aria_loggia
+    window: 'binary_sensor.finestra_balcone'
+    shutter: 'cover.tapparella_balcone'
+    presence: 'binary_sensor.presenza_balcone'
+    temperature: 'sensor.awg_balcone_temperatura'
+    humidity: 'sensor.awg_esterno_umidita'
+    air_quality: 'sensor.qualita_aria_loggia'
   - id: camera_3
     name: Cameretta
-    window: binary_sensor.finestra_camera_3
-    shutter: cover.tapparella_camera_3
-    presence: binary_sensor.presenza_camera_3
-    temperature: sensor.awg_cameretta_temperatura
-    humidity: sensor.awg_cameretta_umidita
-    air_quality: sensor.qualita_aria_camera_3
+    window: 'binary_sensor.finestra_cameretta'
+    shutter: 'cover.tapparella_cameretta'
+    presence: 'binary_sensor.presenza_cameretta'
+    temperature: 'sensor.awg_cameretta_temperatura'
+    humidity: 'sensor.awg_cameretta_umidita'
+    air_quality: 'sensor.qualita_aria_camera_3'
 ```
 
 ---
