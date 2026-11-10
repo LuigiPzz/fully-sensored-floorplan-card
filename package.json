@@ -1,0 +1,17 @@
+{
+  "name": "fully-sensored-floorplan-card",
+  "version": "0.0.1-alfa",
+  "description": "Custom Lovelace card per Home Assistant per monitorare su planimetria finestre, tapparelle, presenza, temperatura, umidità e qualità dell'aria.",
+  "main": "fully-sensored-floorplan-card.js",
+  "keywords": [
+    "home-assistant",
+    "homeassistant",
+    "lovelace",
+    "custom-card",
+    "floorplan",
+    "sensors",
+    "hacs"
+  ],
+  "author": "LuigiPzz",
+  "license": "MIT"
+}
