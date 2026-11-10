@@ -1,6 +1,6 @@
 /**
  * FULLY SENSORED FLOORPLAN CARD - Home Assistant Lovelace Custom Card
- * Luxury Dark Architectural Edition
+ * v0.0.2-alfa - Luxury Dark Architectural Edition
  *
  * Visualizza planimetria ad alta fedeltà con:
  * - Finestre (glow cyan luce naturale + diffusione ambientale)
