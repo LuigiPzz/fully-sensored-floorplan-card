@@ -80,7 +80,6 @@ rooms:
     name: Studio
     window: 'binary_sensor.finestra_studio'
     shutter: 'cover.tapparella_studio'
-    presence: 'binary_sensor.presenza_studio'
     temperature: 'sensor.awg_studio_temperatura'
     humidity: 'sensor.awg_studio_umidita'
     air_quality: 'sensor.qualita_aria_studio'
@@ -97,7 +96,6 @@ rooms:
     name: Cucina
     window: 'binary_sensor.finestra_cucina'
     shutter: 'cover.tapparella_cucina'
-    presence: 'binary_sensor.presenza_cucina'
     temperature: 'sensor.awg_cucina_temperatura'
     humidity: 'sensor.awg_cucina_umidita'
     air_quality: 'sensor.qualita_aria_cucina'
@@ -128,7 +126,6 @@ rooms:
     name: Cameretta
     window: 'binary_sensor.finestra_cameretta'
     shutter: 'cover.tapparella_cameretta'
-    presence: 'binary_sensor.presenza_cameretta'
     temperature: 'sensor.awg_cameretta_temperatura'
     humidity: 'sensor.awg_cameretta_umidita'
     air_quality: 'sensor.qualita_aria_cameretta'

@@ -131,7 +131,7 @@
     "entities": {
       "window": "binary_sensor.finestra_studio",
       "shutter": "cover.tapparella_studio",
-      "presence": "binary_sensor.presenza_studio",
+      "presence": "",
       "temperature": "sensor.awg_studio_temperatura",
       "humidity": "sensor.awg_studio_umidita",
       "air_quality": "sensor.qualita_aria_studio"
@@ -233,7 +233,7 @@
     "entities": {
       "window": "binary_sensor.finestra_cucina",
       "shutter": "cover.tapparella_cucina",
-      "presence": "binary_sensor.presenza_cucina",
+      "presence": "",
       "temperature": "sensor.awg_cucina_temperatura",
       "humidity": "sensor.awg_cucina_umidita",
       "air_quality": "sensor.qualita_aria_cucina"
@@ -401,7 +401,7 @@
     "entities": {
       "window": "binary_sensor.finestra_cameretta",
       "shutter": "cover.tapparella_cameretta",
-      "presence": "binary_sensor.presenza_cameretta",
+      "presence": "",
       "temperature": "sensor.awg_cameretta_temperatura",
       "humidity": "sensor.awg_cameretta_umidita",
       "air_quality": "sensor.qualita_aria_cameretta"
