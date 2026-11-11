@@ -59,17 +59,11 @@ show_climate: true
 rooms:
   - id: salone
     name: Salone
-    window: 'binary_sensor.finestra_salone'
-    shutter: 'cover.tapparella_salone'
-    presence: 'binary_sensor.presenza_salone'
     temperature: 'sensor.awg_salone_temperatura'
     humidity: 'sensor.awg_salone_umidita'
     air_quality: 'sensor.purificatore_xiaomi_pm25'
   - id: camera_da_letto
     name: Camera da letto
-    window: 'binary_sensor.finestra_camera_da_letto'
-    shutter: 'cover.tapparella_camera_da_letto'
-    presence: 'binary_sensor.presenza_camera_da_letto'
     temperature: 'sensor.awg_camera_da_letto_temperatura'
     humidity: 'sensor.awg_camera_da_letto_umidita'
     air_quality: 'sensor.qualita_aria_camera_da_letto'
@@ -125,7 +119,6 @@ rooms:
   - id: cameretta
     name: Cameretta
     window: 'binary_sensor.finestra_cameretta'
-    shutter: 'cover.tapparella_cameretta'
     temperature: 'sensor.awg_cameretta_temperatura'
     humidity: 'sensor.awg_cameretta_umidita'
     air_quality: 'sensor.qualita_aria_cameretta'
