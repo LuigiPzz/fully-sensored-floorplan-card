@@ -98,10 +98,9 @@
     ]
   },
   {
-    "id": "garage",
+    "id": "studio_garage",
     "aliases": [
-      "studio",
-      "studio_garage"
+      "garage"
     ],
     "label": "Studio / Garage",
     "icon": "\ud83d\udce6",
@@ -451,7 +450,9 @@
     function findRoomDef(roomId) {
     if (!roomId) return null;
     const lower = String(roomId).toLowerCase().trim();
-    return ROOM_DEFS.find(x => x.id === lower || (x.aliases && x.aliases.includes(lower))) || null;
+    const exact = ROOM_DEFS.find(x => x.id === lower);
+    if (exact) return exact;
+    return ROOM_DEFS.find(x => x.aliases && x.aliases.includes(lower)) || null;
   }
 
   class FullySensoredFloorplanCard extends HTMLElement {
