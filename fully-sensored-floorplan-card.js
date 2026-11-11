@@ -360,7 +360,7 @@
     "icon": "\ud83c\udf3f",
     "entities": {
       "window": "",
-      "shutter": "cover.tapparella_balcone",
+      "shutter": "",
       "presence": "binary_sensor.esp32_multi_sensore_02_movimento",
       "temperature": "sensor.awg_balcone_temperatura",
       "humidity": "sensor.awg_esterno_umidita",
