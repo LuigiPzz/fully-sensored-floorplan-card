@@ -120,7 +120,6 @@ rooms:
     air_quality: 'sensor.qualita_aria_bagno'
   - id: balcone
     name: Balcone
-    window: 'binary_sensor.finestra_balcone'
     shutter: 'cover.tapparella_balcone'
     presence: 'binary_sensor.esp32_multi_sensore_02_movimento'
     temperature: 'sensor.awg_balcone_temperatura'
