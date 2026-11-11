@@ -597,7 +597,9 @@
     function initCard() {
       card.setConfig({
         type: "custom:fully-sensored-floorplan-card",
-        title: "Planimetria Casa & Clima",
+        title: "Casa",
+        temperature: "sensor.awg_casa_temperatura",
+        humidity: "sensor.awg_casa_umidita",
         show_climate: showClimate,
         home_temperature: "sensor.awg_casa_temperatura",
         home_humidity: "sensor.awg_casa_umidita",

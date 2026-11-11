@@ -465,7 +465,7 @@
     static getStubConfig() {
       return {
         type: "custom:fully-sensored-floorplan-card",
-        title: "Planimetria Casa & Clima",
+        title: "Casa",
         show_climate: true,
         home_temperature: "sensor.awg_casa_temperatura",
         home_humidity: "sensor.awg_casa_umidita",
@@ -486,7 +486,7 @@
 
     setConfig(config) {
       this._config = Object.assign({
-        title: "Planimetria Casa",
+        title: "Casa",
         show_climate: true,
         rooms: ROOM_DEFS
       }, config);
@@ -651,14 +651,20 @@
           <div class="card-header">
             <div class="title-area">
               <div class="title-icon-badge">🏠</div>
-              <span class="card-title">${title}</span>
+              <span class="card-title">${title || "Casa"}</span>
             </div>
             <div class="chips">
-              <span class="chip chip-climate" id="chip-home" style="display:none;"></span>
+              <!-- Sensori Clima dedicati per Casa -->
+              <span class="chip chip-temp" id="chip-temp" style="display:none;"></span>
+              <span class="chip chip-hum" id="chip-hum" style="display:none;"></span>
               <span class="chip chip-climate" id="chip-outdoor" style="display:none;"></span>
+              <!-- Allarme Porta Ingresso -->
               <span class="chip active-door" id="chip-door" style="display:none;">🚨 Porta Aperta</span>
+              <!-- Conteggio Finestre Aperte/Chiuse -->
               <span class="chip" id="chip-win">0 Finestre</span>
-              <span class="chip" id="chip-shut">0 Chiuse</span>
+              <!-- Conteggio Tapparelle Chiuse/Aperte -->
+              <span class="chip" id="chip-shut">0 Tapparelle</span>
+              <!-- Presenze Rilevate -->
               <span class="chip" id="chip-pres">0 Presenze</span>
             </div>
           </div>
@@ -929,7 +935,9 @@
       if (!this._hass) return;
 
       const configuredRooms = this._config.rooms || ROOM_DEFS;
-      let winCount = 0, shutCount = 0, presCount = 0, doorCount = 0;
+      let winCount = 0, totalWindows = 0;
+      let shutClosedCount = 0, totalShutters = 0;
+      let presCount = 0, doorCount = 0;
 
       configuredRooms.forEach(room => {
         const rDef = findRoomDef(room.id) || ROOM_DEFS.find(x => x.id === room.id) || room;
@@ -943,6 +951,7 @@
           winEntities = room.window.split(",").map(s => s.trim());
         }
 
+        if (winEntities.length > 0 || (rDef.windows && rDef.windows.length > 0)) totalWindows++;
         const isWinOpen = winEntities.some(entId => {
           const ent = this._hass.states[entId];
           return ent && (ent.state === "on" || ent.state === "open");
@@ -987,9 +996,10 @@
         });
 
         // Shutter state
+        if ((room.shutter && room.shutter !== "") || (rDef.shutters && rDef.shutters.length > 0)) totalShutters++;
         const shutEntity = (room.shutter && room.shutter !== "") ? this._hass.states[room.shutter] : null;
         const isShutClosed = shutEntity && (shutEntity.state === "closed" || shutEntity.state === "closing");
-        if (isShutClosed) shutCount++;
+        if (isShutClosed) shutClosedCount++;
 
         (rDef.shutters || []).forEach((sh, idx) => {
           const shEl = this.shadowRoot.getElementById(`shutter-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`shutter-${room.id}-${idx}`);
@@ -1071,21 +1081,37 @@
         }
       });
 
-      // Global Header Chips
-      const chipHome = this.shadowRoot.getElementById("chip-home");
-      if (chipHome) {
-        const homeTemp = (this._config.home_temperature && this._hass.states[this._config.home_temperature]) ? this._hass.states[this._config.home_temperature].state : null;
-        const homeHum = (this._config.home_humidity && this._hass.states[this._config.home_humidity]) ? this._hass.states[this._config.home_humidity].state : null;
-        if (homeTemp || homeHum) {
-          const tPart = homeTemp ? Math.round(parseFloat(homeTemp)*10)/10 + "°" : "";
-          const hPart = homeHum ? Math.round(parseFloat(homeHum)) + "%" : "";
-          chipHome.innerHTML = `🏠 Casa: <b>${[tPart, hPart].filter(Boolean).join(" • ")}</b>`;
-          chipHome.style.display = "inline-flex";
+      // 1. Sensore Temperatura Dedicato Casa
+      const tempEntId = this._config.temperature || this._config.home_temperature || "sensor.awg_casa_temperatura";
+      const chipTemp = this.shadowRoot.getElementById("chip-temp");
+      if (chipTemp) {
+        const tempState = (tempEntId && this._hass.states[tempEntId]) ? this._hass.states[tempEntId].state : null;
+        if (tempState !== null && tempState !== undefined && tempState !== "" && tempState !== "unknown" && tempState !== "unavailable") {
+          const tVal = Math.round(parseFloat(tempState) * 10) / 10 + "°";
+          chipTemp.innerHTML = `🌡️ <b>${tVal}</b>`;
+          chipTemp.style.display = "inline-flex";
+          chipTemp.onclick = () => this._handleEntityClick(tempEntId);
         } else {
-          chipHome.style.display = "none";
+          chipTemp.style.display = "none";
         }
       }
 
+      // 2. Sensore Umidità Dedicato Casa
+      const humEntId = this._config.humidity || this._config.home_humidity || "sensor.awg_casa_umidita";
+      const chipHum = this.shadowRoot.getElementById("chip-hum");
+      if (chipHum) {
+        const humState = (humEntId && this._hass.states[humEntId]) ? this._hass.states[humEntId].state : null;
+        if (humState !== null && humState !== undefined && humState !== "" && humState !== "unknown" && humState !== "unavailable") {
+          const hVal = Math.round(parseFloat(humState)) + "%";
+          chipHum.innerHTML = `💧 <b>${hVal}</b>`;
+          chipHum.style.display = "inline-flex";
+          chipHum.onclick = () => this._handleEntityClick(humEntId);
+        } else {
+          chipHum.style.display = "none";
+        }
+      }
+
+      // 3. Esterno (Opzionale)
       const chipOutdoor = this.shadowRoot.getElementById("chip-outdoor");
       if (chipOutdoor) {
         const outTemp = (this._config.outdoor_temperature && this._hass.states[this._config.outdoor_temperature]) ? this._hass.states[this._config.outdoor_temperature].state : null;
@@ -1100,32 +1126,64 @@
         }
       }
 
+      // 4. Numero Finestre Aperte / Chiuse
       const chipWin = this.shadowRoot.getElementById("chip-win");
-      const chipShut = this.shadowRoot.getElementById("chip-shut");
-      const chipPres = this.shadowRoot.getElementById("chip-pres");
-
       if (chipWin) {
-        chipWin.textContent = `${winCount} Finestr${winCount === 1 ? 'a' : 'e'}`;
-        chipWin.className = `chip ${winCount > 0 ? 'active-win' : ''}`;
-      }
-      if (chipShut) {
-        chipShut.textContent = `${shutCount} Chius${shutCount === 1 ? 'a' : 'e'}`;
-        chipShut.className = `chip ${shutCount > 0 ? 'active-shut' : ''}`;
-      }
-      if (chipPres) {
-        chipPres.textContent = `${presCount} Presenz${presCount === 1 ? 'a' : 'e'}`;
-        chipPres.className = `chip ${presCount > 0 ? 'active-pres' : ''}`;
+        const winClosedCount = Math.max(0, totalWindows - winCount);
+        if (winCount > 0) {
+          chipWin.innerHTML = `🪟 <b>${winCount} Apert${winCount === 1 ? 'a' : 'e'}</b> <span style="opacity:0.65;">(${winClosedCount} chius${winClosedCount === 1 ? 'a' : 'e'})</span>`;
+          chipWin.className = "chip active-win";
+        } else {
+          chipWin.innerHTML = `🪟 0 Aperte <span style="opacity:0.65;">(${totalWindows} chiuse)</span>`;
+          chipWin.className = "chip";
+        }
       }
 
+      // 5. Numero Tapparelle Chiuse / Aperte
+      const chipShut = this.shadowRoot.getElementById("chip-shut");
+      if (chipShut) {
+        const shutOpenCount = Math.max(0, totalShutters - shutClosedCount);
+        if (shutClosedCount > 0) {
+          chipShut.innerHTML = `🪟 <b>${shutClosedCount} Chius${shutClosedCount === 1 ? 'a' : 'e'}</b> <span style="opacity:0.65;">(${shutOpenCount} aperte)</span>`;
+          chipShut.className = "chip active-shut";
+        } else {
+          chipShut.innerHTML = `🪟 0 Chiuse <span style="opacity:0.65;">(${totalShutters} aperte)</span>`;
+          chipShut.className = "chip";
+        }
+      }
+
+      // 6. Presenze Rilevate
+      const chipPres = this.shadowRoot.getElementById("chip-pres");
+      if (chipPres) {
+        if (presCount > 0) {
+          chipPres.innerHTML = `👤 <b>${presCount} Presenz${presCount === 1 ? 'a' : 'e'}</b>`;
+          chipPres.className = "chip active-pres";
+        } else {
+          chipPres.innerHTML = `👤 0 Presenze`;
+          chipPres.className = "chip";
+        }
+      }
+
+      // 7. Allarme Porta d'Ingresso
       const chipDoor = this.shadowRoot.getElementById("chip-door");
       if (chipDoor) {
         if (doorCount > 0) {
-          chipDoor.textContent = `🚨 ${doorCount} Port${doorCount === 1 ? 'a Aperta' : 'e Aperte'}`;
+          chipDoor.innerHTML = `🚨 <b>${doorCount} Port${doorCount === 1 ? 'a Aperta' : 'e Aperte'}</b>`;
           chipDoor.style.display = "inline-flex";
         } else {
           chipDoor.style.display = "none";
         }
       }
+    }
+
+    _handleEntityClick(entityId) {
+      if (!entityId) return;
+      const event = new CustomEvent("hass-more-info", {
+        bubbles: true,
+        composed: true,
+        detail: { entityId: entityId }
+      });
+      this.dispatchEvent(event);
     }
 
     _handleRoomClick(room) {
