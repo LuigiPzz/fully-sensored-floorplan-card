@@ -211,7 +211,7 @@
     "entities": {
       "window": "",
       "shutter": "",
-      "presence": "binary_sensor.presenza_ingresso_cucina",
+      "presence": "",
       "temperature": "",
       "humidity": "",
       "air_quality": ""

@@ -94,7 +94,6 @@ rooms:
     air_quality: 'sensor.qualita_aria_bagnetto'
   - id: ingresso_cucina
     name: Ingresso cucina
-    presence: 'binary_sensor.presenza_ingresso_cucina'
   - id: cucina
     name: Cucina
     window: 'binary_sensor.finestra_cucina'
