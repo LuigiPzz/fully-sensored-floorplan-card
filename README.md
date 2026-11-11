@@ -1,6 +1,6 @@
 # 🏠 Fully Sensored Floorplan Card for Home Assistant (Lovelace)
 
-[![version](https://img.shields.io/badge/version-0.0.3--alfa-blue.svg)](https://github.com/LuigiPzz/fully-sensored-floorplan-card)
+[![version](https://img.shields.io/badge/version-0.0.4--alfa-blue.svg)](https://github.com/LuigiPzz/fully-sensored-floorplan-card)
 [![hacs](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://hacs.xyz)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
