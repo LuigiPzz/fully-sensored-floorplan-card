@@ -88,7 +88,6 @@ rooms:
     name: Bagnetto
     window: 'binary_sensor.finestra_bagnetto'
     shutter: 'cover.tapparella_bagnetto'
-    presence: 'binary_sensor.presenza_bagnetto'
     temperature: 'sensor.awg_bagnetto_temperatura'
     humidity: 'sensor.awg_bagnetto_umidita'
     air_quality: 'sensor.qualita_aria_bagnetto'
