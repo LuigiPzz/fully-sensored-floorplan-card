@@ -110,7 +110,6 @@ rooms:
     humidity: 'sensor.awg_ingresso_umidita'
   - id: ingresso_camere
     name: Ingresso Camere
-    presence: 'binary_sensor.presenza_ingresso_camere'
   - id: bagno
     name: Bagno
     window: 'binary_sensor.finestra_bagno'
