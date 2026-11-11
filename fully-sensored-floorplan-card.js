@@ -98,16 +98,18 @@
     ]
   },
   {
-    "id": "studio_garage",
+    "id": "terrazzo",
     "aliases": [
+      "terrazza",
+      "studio_garage",
       "garage"
     ],
-    "label": "Studio / Garage",
-    "icon": "\ud83d\udce6",
+    "label": "Terrazzo",
+    "icon": "\ud83e\udeb4",
     "entities": {
       "window": "",
       "shutter": "",
-      "presence": "binary_sensor.presenza_garage",
+      "presence": "binary_sensor.presenza_terrazzo",
       "temperature": "",
       "humidity": "",
       "air_quality": ""
