@@ -826,23 +826,97 @@
       `;
 
       configuredRooms.forEach(room => {
-        const r = ROOM_DEFS.find(x => x.id === room.id) || room;
+        const r = findRoomDef(room.id) || ROOM_DEFS.find(x => x.id === room.id) || room;
+        const canonicalId = r.id || room.id;
         const cx = r.cx || 500, cy = r.cy || 350;
+        const lightRadius = r.id === "salone" ? 270 : (r.id === "camera_da_letto" ? 210 : (r.id === "cucina" ? 180 : (r.id === "cameretta" ? 190 : 150)));
+
         defsHtml += `
+          <!-- ClipPath to strictly constrain light diffusion within room walls -->
+          <clipPath id="clip-room-${canonicalId}">
+            <path d="${r.path}" />
+          </clipPath>
+
+          <!-- Main Light Central Cone (Intense at center cx,cy with gradient fading to edges) -->
+          <radialGradient id="main-light-grad-${canonicalId}" cx="${cx}" cy="${cy}" r="${lightRadius}" gradientUnits="userSpaceOnUse">
+            <stop id="main-stop-0-${canonicalId}" offset="0%" stop-color="#fef08a" stop-opacity="0.55"/>
+            <stop id="main-stop-1-${canonicalId}" offset="30%" stop-color="#fde047" stop-opacity="0.32"/>
+            <stop id="main-stop-2-${canonicalId}" offset="65%" stop-color="#f59e0b" stop-opacity="0.10"/>
+            <stop id="main-stop-3-${canonicalId}" offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+          </radialGradient>
+
           <!-- Presence radiant warm glow -->
-          <radialGradient id="pres-grad-${room.id}" cx="${cx}" cy="${cy}" r="180" gradientUnits="userSpaceOnUse">
+          <radialGradient id="pres-grad-${canonicalId}" cx="${cx}" cy="${cy}" r="180" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.28"/>
             <stop offset="55%" stop-color="#f59e0b" stop-opacity="0.09"/>
             <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
           </radialGradient>
           <!-- Window airflow sky-blue glow -->
-          <radialGradient id="win-grad-${room.id}" cx="${cx}" cy="${cy}" r="200" gradientUnits="userSpaceOnUse">
+          <radialGradient id="win-grad-${canonicalId}" cx="${cx}" cy="${cy}" r="200" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stop-color="#0284c7" stop-opacity="0.25"/>
             <stop offset="60%" stop-color="#0284c7" stop-opacity="0.08"/>
             <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
           </radialGradient>
         `;
       });
+
+      // Ambient Light Gradient Formations (invisible sources emitting diffuse light inwards from indicated areas)
+      defsHtml += `
+        <!-- Salone: Top wall wash (downwards) -->
+        <radialGradient id="amb-grad-salone-top" cx="365" cy="20" r="210" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fde047" stop-opacity="0.65"/>
+          <stop offset="40%" stop-color="#fde047" stop-opacity="0.30"/>
+          <stop offset="75%" stop-color="#f59e0b" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Salone: Bottom wall wash (upwards) -->
+        <radialGradient id="amb-grad-salone-bot" cx="365" cy="265" r="200" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fde047" stop-opacity="0.65"/>
+          <stop offset="40%" stop-color="#fde047" stop-opacity="0.30"/>
+          <stop offset="75%" stop-color="#f59e0b" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Salone: Top-left spot wash -->
+        <radialGradient id="amb-grad-salone-spot" cx="228" cy="32" r="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.60"/>
+          <stop offset="45%" stop-color="#fde047" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- Camera da letto: Applique 1 (near Bagno) -->
+        <radialGradient id="amb-grad-camera-1" cx="774" cy="255" r="130" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.65"/>
+          <stop offset="40%" stop-color="#fde047" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Camera da letto: Applique 2 (near Balcone) -->
+        <radialGradient id="amb-grad-camera-2" cx="940" cy="255" r="130" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.65"/>
+          <stop offset="40%" stop-color="#fde047" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- Cucina: Bottom wall wash (upwards) -->
+        <radialGradient id="amb-grad-cucina-bot" cx="335" cy="688" r="160" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fde047" stop-opacity="0.65"/>
+          <stop offset="45%" stop-color="#fde047" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- Bagno: Bottom wall wash (upwards) -->
+        <radialGradient id="amb-grad-bagno-bot" cx="850" cy="390" r="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fde047" stop-opacity="0.65"/>
+          <stop offset="45%" stop-color="#fde047" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+        </radialGradient>
+
+        <!-- Ingresso: Spot wash (bottom-right) -->
+        <radialGradient id="amb-grad-ingresso-spot" cx="641" cy="510" r="120" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.60"/>
+          <stop offset="45%" stop-color="#fde047" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+        </radialGradient>
+      `;
       defsHtml += `</defs>`;
 
       svg.innerHTML = `
@@ -850,6 +924,7 @@
         <image id="svg-walls-img" href="${BASE_IMAGE}" x="0" y="0" width="1024" height="711" preserveAspectRatio="none" style="pointer-events: none; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.65));" />
         <g id="g-room-bases"></g>
         <g id="g-room-fills"></g>
+        <g id="g-main-lights"></g>
         <g id="g-ambient-lights"></g>
         <g id="g-presence-glow"></g>
         <g id="g-windows"></g>
@@ -861,6 +936,7 @@
 
       const gBases = this.shadowRoot.getElementById("g-room-bases");
       const gFills = this.shadowRoot.getElementById("g-room-fills");
+      const gMainLights = this.shadowRoot.getElementById("g-main-lights");
       const gAmb = this.shadowRoot.getElementById("g-ambient-lights");
       const gPresGlow = this.shadowRoot.getElementById("g-presence-glow");
       const gWins = this.shadowRoot.getElementById("g-windows");
@@ -909,110 +985,52 @@
         presGlow.style.transition = "opacity 0.45s ease";
         gPresGlow.appendChild(presGlow);
 
-        // 3b. Ambient Lights (Linear LED strips & Point spots along indicated fixtures)
+        // 3a. Main Light Cone (Intense at center cx,cy with gradient fading outwards, clipped to room)
+        const mainLightG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        mainLightG.setAttribute("clip-path", `url(#clip-room-${canonicalId})`);
+        
+        const mainWash = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        mainWash.setAttribute("id", `main-light-wash-${canonicalId}`);
+        mainWash.setAttribute("d", r.path);
+        mainWash.setAttribute("fill", `url(#main-light-grad-${canonicalId})`);
+        mainWash.setAttribute("opacity", "0");
+        mainWash.style.transition = "opacity 0.5s ease";
+        mainWash.style.pointerEvents = "none";
+        mainLightG.appendChild(mainWash);
+        gMainLights.appendChild(mainLightG);
+
+        // 3b. Ambient Lights (Invisible sources emitting realistic diffusion inwards, strictly clipped to room)
         const ambG = document.createElementNS("http://www.w3.org/2000/svg", "g");
         ambG.setAttribute("id", `amb-${canonicalId}`);
-        ambG.setAttribute("class", "amb-light-group");
-        ambG.style.transition = "all 0.35s ease";
-        ambG.style.cursor = "pointer";
+        ambG.setAttribute("clip-path", `url(#clip-room-${canonicalId})`);
+        ambG.setAttribute("opacity", "0");
+        ambG.style.transition = "opacity 0.5s ease";
+        ambG.style.pointerEvents = "none";
 
-        (r.ambient_fixtures || []).forEach((fix, idx) => {
-          if (fix.type === "strip") {
-            const stripG = document.createElementNS("http://www.w3.org/2000/svg", "g");
-            stripG.setAttribute("id", `amb-strip-g-${canonicalId}-${idx}`);
-
-            // Soft diffuse wash area on floor
-            const wash = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-            wash.setAttribute("id", `amb-wash-${canonicalId}-${idx}`);
-            const dy = fix.wash_direction === "up" ? -35 : 35;
-            const pts = `${fix.x1},${fix.y1} ${fix.x2},${fix.y2} ${fix.x2 + (fix.x2 > fix.x1 ? 15 : -15)},${fix.y2 + dy} ${fix.x1 - (fix.x2 > fix.x1 ? 15 : -15)},${fix.y1 + dy}`;
-            wash.setAttribute("points", pts);
-            wash.setAttribute("fill", "#fde047");
-            wash.setAttribute("opacity", "0");
-            wash.style.transition = "all 0.45s ease";
-            wash.style.pointerEvents = "none";
-            stripG.appendChild(wash);
-
-            // Base recessed architectural channel (subtle off state)
-            const baseLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            baseLine.setAttribute("x1", fix.x1);
-            baseLine.setAttribute("y1", fix.y1);
-            baseLine.setAttribute("x2", fix.x2);
-            baseLine.setAttribute("y2", fix.y2);
-            baseLine.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
-            baseLine.setAttribute("stroke-width", fix.width || 3.5);
-            baseLine.setAttribute("stroke-linecap", "round");
-            stripG.appendChild(baseLine);
-
-            // Glowing neon LED strip line
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("id", `amb-line-${canonicalId}-${idx}`);
-            line.setAttribute("x1", fix.x1);
-            line.setAttribute("y1", fix.y1);
-            line.setAttribute("x2", fix.x2);
-            line.setAttribute("y2", fix.y2);
-            line.setAttribute("stroke", "#fde047");
-            line.setAttribute("stroke-width", fix.width || 3.5);
-            line.setAttribute("stroke-linecap", "round");
-            line.setAttribute("opacity", "0");
-            line.setAttribute("filter", "url(#glow-ambient-strip)");
-            line.style.transition = "all 0.4s ease";
-            stripG.appendChild(line);
-
-            ambG.appendChild(stripG);
-          } else if (fix.type === "spot") {
-            const spotG = document.createElementNS("http://www.w3.org/2000/svg", "g");
-            spotG.setAttribute("id", `amb-spot-g-${canonicalId}-${idx}`);
-
-            // Soft radiant diffuse halo
-            const halo = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            halo.setAttribute("id", `amb-halo-${canonicalId}-${idx}`);
-            halo.setAttribute("cx", fix.x);
-            halo.setAttribute("cy", fix.y);
-            halo.setAttribute("r", fix.halo_r || 22);
-            halo.setAttribute("fill", "#fde047");
-            halo.setAttribute("opacity", "0");
-            halo.style.transition = "all 0.45s ease";
-            halo.style.pointerEvents = "none";
-            spotG.appendChild(halo);
-
-            // Base recessed fixture ring
-            const baseCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            baseCircle.setAttribute("cx", fix.x);
-            baseCircle.setAttribute("cy", fix.y);
-            baseCircle.setAttribute("r", fix.r || 5);
-            baseCircle.setAttribute("fill", "rgba(255, 255, 255, 0.05)");
-            baseCircle.setAttribute("stroke", "rgba(255, 255, 255, 0.2)");
-            baseCircle.setAttribute("stroke-width", "1.2");
-            spotG.appendChild(baseCircle);
-
-            // Glowing core spot lamp
-            const core = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            core.setAttribute("id", `amb-core-${canonicalId}-${idx}`);
-            core.setAttribute("class", "amb-core");
-            core.setAttribute("cx", fix.x);
-            core.setAttribute("cy", fix.y);
-            core.setAttribute("r", fix.r || 5);
-            core.setAttribute("fill", "#fef08a");
-            core.setAttribute("stroke", "#facc15");
-            core.setAttribute("stroke-width", "1.5");
-            core.setAttribute("opacity", "0");
-            core.setAttribute("filter", "url(#glow-ambient-spot)");
-            core.style.transition = "all 0.4s ease";
-            spotG.appendChild(core);
-
-            ambG.appendChild(spotG);
-          }
-        });
-
-        // Click to toggle ambient light
-        ambG.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const ambId = room.ambient_light || room.secondary_light || room.light_2;
-          if (ambId && this._hass) {
-            this._hass.callService("light", "toggle", { entity_id: ambId });
-          }
-        });
+        if (canonicalId === "salone") {
+          ambG.innerHTML = `
+            <ellipse id="amb-wash-salone-top" cx="365" cy="20" rx="200" ry="150" fill="url(#amb-grad-salone-top)" />
+            <ellipse id="amb-wash-salone-bot" cx="365" cy="265" rx="190" ry="140" fill="url(#amb-grad-salone-bot)" />
+            <circle id="amb-wash-salone-spot" cx="228" cy="32" r="120" fill="url(#amb-grad-salone-spot)" />
+          `;
+        } else if (canonicalId === "camera_da_letto") {
+          ambG.innerHTML = `
+            <circle id="amb-wash-camera-1" cx="774" cy="255" r="130" fill="url(#amb-grad-camera-1)" />
+            <circle id="amb-wash-camera-2" cx="940" cy="255" r="130" fill="url(#amb-grad-camera-2)" />
+          `;
+        } else if (canonicalId === "cucina") {
+          ambG.innerHTML = `
+            <ellipse id="amb-wash-cucina-bot" cx="335" cy="688" rx="160" ry="120" fill="url(#amb-grad-cucina-bot)" />
+          `;
+        } else if (canonicalId === "bagno") {
+          ambG.innerHTML = `
+            <ellipse id="amb-wash-bagno-bot" cx="850" cy="390" rx="120" ry="95" fill="url(#amb-grad-bagno-bot)" />
+          `;
+        } else if (canonicalId === "ingresso") {
+          ambG.innerHTML = `
+            <circle id="amb-wash-ingresso-spot" cx="641" cy="510" r="120" fill="url(#amb-grad-ingresso-spot)" />
+          `;
+        }
 
         gAmb.appendChild(ambG);
 
@@ -1283,7 +1301,34 @@
           presGlow.setAttribute("opacity", isPresent ? "1" : "0");
         }
 
-        // Ambient Light state (support ambient_light, secondary_light, light_2)
+        // Primary Room Light state (light: central light cone intense at center cx,cy with gradient fading outwards)
+        const mainLightId = room.light || room.primary_light || room.main_light || (rDef.entities && rDef.entities.light) || "";
+        const mainLightEntity = (mainLightId && this._hass) ? this._hass.states[mainLightId] : null;
+        const isMainLightOn = mainLightEntity && mainLightEntity.state === "on";
+
+        const mainLightWash = this.shadowRoot.getElementById(`main-light-wash-${canonicalId}`) || this.shadowRoot.getElementById(`main-light-wash-${room.id}`);
+        if (mainLightWash) {
+          if (isMainLightOn) {
+            let mBrightnessFactor = 1.0;
+            if (mainLightEntity.attributes && mainLightEntity.attributes.brightness !== undefined) {
+              mBrightnessFactor = Math.max(0.35, mainLightEntity.attributes.brightness / 255);
+            }
+            if (mainLightEntity.attributes && mainLightEntity.attributes.rgb_color && Array.isArray(mainLightEntity.attributes.rgb_color)) {
+              const [cr, cg, cb] = mainLightEntity.attributes.rgb_color;
+              const s0 = this.shadowRoot.getElementById(`main-stop-0-${canonicalId}`);
+              const s1 = this.shadowRoot.getElementById(`main-stop-1-${canonicalId}`);
+              const s2 = this.shadowRoot.getElementById(`main-stop-2-${canonicalId}`);
+              if (s0) s0.setAttribute("stop-color", `rgb(${cr}, ${cg}, ${cb})`);
+              if (s1) s1.setAttribute("stop-color", `rgb(${cr}, ${cg}, ${cb})`);
+              if (s2) s2.setAttribute("stop-color", `rgb(${cr}, ${cg}, ${cb})`);
+            }
+            mainLightWash.setAttribute("opacity", (1.0 * mBrightnessFactor).toString());
+          } else {
+            mainLightWash.setAttribute("opacity", "0");
+          }
+        }
+
+        // Ambient Light state (ambient_light / secondary_light: invisible sources emitting diffusion from indicated areas)
         const ambEntId = room.ambient_light || room.secondary_light || room.light_2 || (rDef.entities && rDef.entities.ambient_light) || "";
         const ambEntity = (ambEntId && this._hass) ? this._hass.states[ambEntId] : null;
         const isAmbOn = ambEntity && ambEntity.state === "on";
@@ -1294,65 +1339,11 @@
             ambGroup.style.display = "none";
           } else {
             ambGroup.style.display = "block";
-            let lightColor = "#fde047";
-            let coreColor = "#fef08a";
-            let washColor = "rgba(253, 224, 71, 0.22)";
-            let haloColor = "rgba(253, 224, 71, 0.35)";
-            let brightnessFactor = 1.0;
-
-            if (ambEntity && ambEntity.attributes) {
-              const attrs = ambEntity.attributes;
-              if (attrs.rgb_color && Array.isArray(attrs.rgb_color)) {
-                const [cr, cg, cb] = attrs.rgb_color;
-                lightColor = `rgb(${cr}, ${cg}, ${cb})`;
-                coreColor = `rgb(${Math.min(255, cr + 40)}, ${Math.min(255, cg + 40)}, ${Math.min(255, cb + 40)})`;
-                washColor = `rgba(${cr}, ${cg}, ${cb}, 0.25)`;
-                haloColor = `rgba(${cr}, ${cg}, ${cb}, 0.4)`;
-              }
-              if (attrs.brightness !== undefined) {
-                brightnessFactor = Math.max(0.35, attrs.brightness / 255);
-              }
+            let aBrightnessFactor = 1.0;
+            if (ambEntity && ambEntity.attributes && ambEntity.attributes.brightness !== undefined) {
+              aBrightnessFactor = Math.max(0.35, ambEntity.attributes.brightness / 255);
             }
-
-            (rDef.ambient_fixtures || []).forEach((fix, idx) => {
-              if (fix.type === "strip") {
-                const line = this.shadowRoot.getElementById(`amb-line-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-line-${room.id}-${idx}`);
-                const wash = this.shadowRoot.getElementById(`amb-wash-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-wash-${room.id}-${idx}`);
-                if (line) {
-                  line.setAttribute("stroke", lightColor);
-                  line.setAttribute("opacity", isAmbOn ? (0.95 * brightnessFactor) : "0");
-                }
-                if (wash) {
-                  wash.setAttribute("fill", washColor);
-                  wash.setAttribute("opacity", isAmbOn ? (0.45 * brightnessFactor) : "0");
-                }
-              } else if (fix.type === "spot") {
-                const core = this.shadowRoot.getElementById(`amb-core-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-core-${room.id}-${idx}`);
-                const halo = this.shadowRoot.getElementById(`amb-halo-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-halo-${room.id}-${idx}`);
-                if (core) {
-                  core.setAttribute("fill", coreColor);
-                  core.setAttribute("stroke", lightColor);
-                  core.setAttribute("opacity", isAmbOn ? (1 * brightnessFactor) : "0");
-                }
-                if (halo) {
-                  halo.setAttribute("fill", haloColor);
-                  halo.setAttribute("opacity", isAmbOn ? (0.6 * brightnessFactor) : "0");
-                }
-              }
-            });
-          }
-        }
-
-        // Primary Room Light state (light)
-        const mainLightId = room.light || room.primary_light || room.main_light || (rDef.entities && rDef.entities.light) || "";
-        const mainLightEntity = (mainLightId && this._hass) ? this._hass.states[mainLightId] : null;
-        const isMainLightOn = mainLightEntity && mainLightEntity.state === "on";
-        const baseFloorPoly = this.shadowRoot.querySelector(`#g-room-bases path[d="${rDef.path}"]`);
-        if (baseFloorPoly) {
-          if (isMainLightOn) {
-            baseFloorPoly.setAttribute("fill", "rgba(254, 240, 138, 0.08)");
-          } else {
-            baseFloorPoly.setAttribute("fill", "rgba(255, 255, 255, 0.01)");
+            ambGroup.setAttribute("opacity", isAmbOn ? (1.0 * aBrightnessFactor).toString() : "0");
           }
         }
 
