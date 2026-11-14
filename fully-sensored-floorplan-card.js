@@ -777,6 +777,7 @@
               <span class="chip chip-temp" id="chip-temp" style="display:none;"></span>
               <span class="chip chip-hum" id="chip-hum" style="display:none;"></span>
               <span class="chip chip-climate" id="chip-outdoor" style="display:none;"></span>
+              <span class="chip chip-aq" id="chip-aq" style="display:none;"></span>
               <!-- Allarme Porta Ingresso -->
               <span class="chip active-door" id="chip-door" style="display:none;">🚨 Porta Aperta</span>
               <!-- Conteggio Luci Accese -->
@@ -1395,8 +1396,9 @@
         const climGroup = this.shadowRoot.getElementById("clim-" + canonicalId) || this.shadowRoot.getElementById("clim-" + room.id);
 
         let hasAq = false;
+        let aqInfo = null;
         if (aqDot) {
-          const aqInfo = parseAirQuality(aqState);
+          aqInfo = parseAirQuality(aqState);
           if (aqInfo) {
             aqDot.setAttribute("fill", aqInfo.color);
             aqDot.style.display = "block";
@@ -1409,27 +1411,52 @@
         }
 
         if (climTxt) {
-          if (hasTemp && hasHum) {
+          const parts = [];
+          if (hasTemp) {
             const tStr = Math.round(parseFloat(tempState) * 10) / 10 + "°";
-            const hStr = Math.round(parseFloat(humState)) + "%";
-            climTxt.innerHTML = `${tStr} <tspan fill="#64748b">•</tspan> <tspan fill="#38bdf8">${hStr}</tspan>`;
-          } else if (hasTemp) {
-            climTxt.textContent = Math.round(parseFloat(tempState) * 10) / 10 + "°";
-          } else if (hasHum) {
-            climTxt.innerHTML = `<tspan fill="#38bdf8">${Math.round(parseFloat(humState))}%</tspan>`;
-          } else {
-            climTxt.textContent = "";
+            parts.push(tStr);
           }
+          if (hasHum) {
+            const hStr = Math.round(parseFloat(humState)) + "%";
+            parts.push(`<tspan fill="#38bdf8">${hStr}</tspan>`);
+          }
+          if (hasAq && aqInfo) {
+            // Clearly show PM2.5 / Air Quality value
+            parts.push(`<tspan fill="${aqInfo.color}">${aqInfo.label}</tspan>`);
+          }
+          climTxt.innerHTML = parts.join(' <tspan fill="#64748b">•</tspan> ');
         }
 
-        // Adjust rect width dynamically based on content
+        // Adjust rect width dynamically based on visible values
         if (climRect) {
-          const w = (hasTemp && hasHum) ? (hasAq ? 96 : 82) : (hasTemp || hasHum) ? 68 : 34;
+          let w = 82;
+          if (hasTemp && hasHum && hasAq) {
+            w = 138;
+          } else if ((hasTemp || hasHum) && hasAq) {
+            w = 108;
+          } else if (hasTemp && hasHum) {
+            w = 82;
+          } else if (hasAq) {
+            w = 78;
+          } else if (hasTemp || hasHum) {
+            w = 54;
+          }
+
           const cx = rDef.cx || 500;
           climRect.setAttribute("width", w);
           climRect.setAttribute("x", cx - (w / 2));
           if (aqDot) aqDot.setAttribute("cx", cx - (w / 2) + 11);
           if (climTxt) climTxt.setAttribute("x", hasAq ? (cx - (w / 2) + 22) : (cx - (w / 2) + 10));
+        }
+
+        // Click on climate pill opens sensor info
+        if (climGroup) {
+          climGroup.style.cursor = "pointer";
+          climGroup.onclick = (e) => {
+            e.stopPropagation();
+            const targetEnt = room.air_quality || room.temperature || room.humidity;
+            if (targetEnt) this._handleEntityClick(targetEnt);
+          };
         }
 
         if (climGroup) {
@@ -1464,6 +1491,32 @@
           chipHum.onclick = () => this._handleEntityClick(humEntId);
         } else {
           chipHum.style.display = "none";
+        }
+      }
+
+      
+      // 2b. Qualità dell'Aria Casa / Salone nel Header
+      const chipAq = this.shadowRoot.getElementById("chip-aq");
+      if (chipAq) {
+        let aqEntId = this._config.air_quality || this._config.home_air_quality;
+        if (!aqEntId) {
+          // Fallback to room with air_quality sensor (e.g. salone)
+          const roomWithAq = configuredRooms.find(r => r.air_quality && r.air_quality !== "");
+          if (roomWithAq) aqEntId = roomWithAq.air_quality;
+        }
+
+        if (aqEntId && this._hass.states[aqEntId]) {
+          const aqVal = this._hass.states[aqEntId].state;
+          const aqObj = parseAirQuality(aqVal);
+          if (aqObj) {
+            chipAq.innerHTML = `🍃 Aria: <b style="color:${aqObj.color};">${aqObj.label}</b> <span style="opacity:0.75;">(${aqObj.status})</span>`;
+            chipAq.style.display = "inline-flex";
+            chipAq.onclick = () => this._handleEntityClick(aqEntId);
+          } else {
+            chipAq.style.display = "none";
+          }
+        } else {
+          chipAq.style.display = "none";
         }
       }
 
