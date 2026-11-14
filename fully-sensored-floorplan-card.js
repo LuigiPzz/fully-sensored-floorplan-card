@@ -688,6 +688,12 @@
             color: #c084fc;
             box-shadow: 0 0 12px rgba(168, 85, 247, 0.28);
           }
+          .chip.active-light {
+            background: rgba(253, 224, 71, 0.2);
+            border-color: rgba(250, 204, 21, 0.55);
+            color: #fde047;
+            box-shadow: 0 0 14px rgba(250, 204, 21, 0.35);
+          }
           .chip.active-pres {
             background: rgba(245, 158, 11, 0.18);
             border-color: rgba(251, 191, 36, 0.45);
@@ -773,6 +779,8 @@
               <span class="chip chip-climate" id="chip-outdoor" style="display:none;"></span>
               <!-- Allarme Porta Ingresso -->
               <span class="chip active-door" id="chip-door" style="display:none;">🚨 Porta Aperta</span>
+              <!-- Conteggio Luci Accese -->
+              <span class="chip" id="chip-light" style="display:none;">💡 0 Luci</span>
               <!-- Conteggio Finestre Aperte/Chiuse -->
               <span class="chip" id="chip-win">0 Finestre</span>
               <!-- Conteggio Tapparelle Chiuse/Aperte -->
@@ -1099,6 +1107,43 @@
         lbl.textContent = displayName.toUpperCase();
         lG.appendChild(lbl);
 
+        
+        // 7b. Interactive Light Toggle Button (if room has light or ambient_light)
+        const lightG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        lightG.setAttribute("id", `room-light-btn-${canonicalId}`);
+        lightG.setAttribute("class", "room-light-btn");
+        lightG.style.display = "none";
+        lightG.style.cursor = "pointer";
+
+        const lightBtnCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        lightBtnCircle.setAttribute("id", `room-light-circle-${canonicalId}`);
+        lightBtnCircle.setAttribute("cx", cx + 36);
+        lightBtnCircle.setAttribute("cy", cy - 12);
+        lightBtnCircle.setAttribute("r", "9");
+        lightBtnCircle.setAttribute("fill", "rgba(255, 255, 255, 0.08)");
+        lightBtnCircle.setAttribute("stroke", "rgba(255, 255, 255, 0.18)");
+        lightBtnCircle.setAttribute("stroke-width", "1");
+        lightBtnCircle.style.transition = "all 0.3s ease";
+        lightG.appendChild(lightBtnCircle);
+
+        const lightBtnIco = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        lightBtnIco.setAttribute("id", `room-light-ico-${canonicalId}`);
+        lightBtnIco.setAttribute("x", cx + 36);
+        lightBtnIco.setAttribute("y", cy - 8.5);
+        lightBtnIco.setAttribute("text-anchor", "middle");
+        lightBtnIco.setAttribute("font-size", "9.5");
+        lightBtnIco.textContent = "💡";
+        lightG.appendChild(lightBtnIco);
+
+        lightG.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const targetLight = room.light || room.primary_light || room.main_light || room.ambient_light || room.secondary_light;
+          if (targetLight && this._hass) {
+            this._hass.callService("light", "toggle", { entity_id: targetLight });
+          }
+        });
+        lG.appendChild(lightG);
+
         gLbl.appendChild(lG);
 
         // 8. Climate Glassmorphic Pill at (cx, cy + 14)
@@ -1150,7 +1195,7 @@
       const configuredRooms = this._config.rooms || ROOM_DEFS;
       let winCount = 0, totalWindows = 0;
       let shutClosedCount = 0, totalShutters = 0;
-      let presCount = 0, doorCount = 0;
+      let presCount = 0, doorCount = 0, lightCount = 0;
 
       configuredRooms.forEach(room => {
         const rDef = findRoomDef(room.id) || ROOM_DEFS.find(x => x.id === room.id) || room;
@@ -1310,6 +1355,31 @@
           }
         }
 
+        if (isMainLightOn) lightCount++;
+        if (isAmbOn) lightCount++;
+
+        // Update room light button
+        const lightBtn = this.shadowRoot.getElementById(`room-light-btn-${canonicalId}`) || this.shadowRoot.getElementById(`room-light-btn-${room.id}`);
+        const lightBtnCircle = this.shadowRoot.getElementById(`room-light-circle-${canonicalId}`) || this.shadowRoot.getElementById(`room-light-circle-${room.id}`);
+        const hasAnyLight = Boolean(mainLightId || ambEntId);
+        if (lightBtn) {
+          if (hasAnyLight) {
+            lightBtn.style.display = "block";
+            const isAnyOn = isMainLightOn || isAmbOn;
+            if (isAnyOn) {
+              lightBtnCircle.setAttribute("fill", "rgba(253, 224, 71, 0.28)");
+              lightBtnCircle.setAttribute("stroke", "#facc15");
+              lightBtnCircle.setAttribute("filter", "url(#glow-ambient-spot)");
+            } else {
+              lightBtnCircle.setAttribute("fill", "rgba(255, 255, 255, 0.06)");
+              lightBtnCircle.setAttribute("stroke", "rgba(255, 255, 255, 0.16)");
+              lightBtnCircle.removeAttribute("filter");
+            }
+          } else {
+            lightBtn.style.display = "none";
+          }
+        }
+
         // Climate data
         const tempState = (room.temperature && this._hass.states[room.temperature]) ? this._hass.states[room.temperature].state : null;
         const humState = (room.humidity && this._hass.states[room.humidity]) ? this._hass.states[room.humidity].state : null;
@@ -1451,6 +1521,20 @@
       }
 
       // 7. Allarme Porta d'Ingresso
+      // 3b. Conteggio Luci Accese
+      const chipLight = this.shadowRoot.getElementById("chip-light");
+      if (chipLight) {
+        if (lightCount > 0) {
+          chipLight.innerHTML = `💡 <b>${lightCount} Acces${lightCount === 1 ? 'a' : 'e'}</b>`;
+          chipLight.className = "chip active-light";
+          chipLight.style.display = "inline-flex";
+        } else {
+          chipLight.innerHTML = `💡 0 Accese`;
+          chipLight.className = "chip";
+          chipLight.style.display = "inline-flex";
+        }
+      }
+
       const chipDoor = this.shadowRoot.getElementById("chip-door");
       if (chipDoor) {
         if (doorCount > 0) {
