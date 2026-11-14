@@ -62,6 +62,8 @@ rooms:
     temperature: 'sensor.awg_salone_temperatura'
     humidity: 'sensor.awg_salone_umidita'
     air_quality: 'sensor.purificatore_xiaomi_pm25'
+    light: 'light.luce_salone'                 # (Opzionale) Prima entità luce principale
+    ambient_light: 'light.striscia_salone'     # Seconda entità luce secondaria / ambientale
   - id: camera_da_letto
     name: Camera da letto
     temperature: 'sensor.awg_camera_da_letto_temperatura'

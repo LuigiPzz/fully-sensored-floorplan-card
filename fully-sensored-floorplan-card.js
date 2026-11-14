@@ -29,7 +29,9 @@
       "presence": "",
       "temperature": "sensor.awg_salone_temperatura",
       "humidity": "sensor.awg_salone_umidita",
-      "air_quality": "sensor.purificatore_xiaomi_pm25"
+      "air_quality": "sensor.purificatore_xiaomi_pm25",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 21.8,
@@ -54,6 +56,33 @@
         "w": 7,
         "h": 171
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "spot",
+        "x": 228,
+        "y": 32,
+        "r": 5.5,
+        "halo_r": 24
+      },
+      {
+        "type": "strip",
+        "x1": 270,
+        "y1": 32,
+        "x2": 460,
+        "y2": 32,
+        "width": 3.5,
+        "wash_direction": "down"
+      },
+      {
+        "type": "strip",
+        "x1": 270,
+        "y1": 252,
+        "x2": 452,
+        "y2": 252,
+        "width": 3.5,
+        "wash_direction": "up"
+      }
     ]
   },
   {
@@ -70,7 +99,9 @@
       "presence": "",
       "temperature": "sensor.awg_camera_da_letto_temperatura",
       "humidity": "sensor.awg_camera_da_letto_umidita",
-      "air_quality": "sensor.qualita_aria_camera_da_letto"
+      "air_quality": "sensor.qualita_aria_camera_da_letto",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 20.2,
@@ -95,6 +126,22 @@
         "w": 7,
         "h": 140
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "spot",
+        "x": 774,
+        "y": 248,
+        "r": 5,
+        "halo_r": 20
+      },
+      {
+        "type": "spot",
+        "x": 940,
+        "y": 250,
+        "r": 5,
+        "halo_r": 20
+      }
     ]
   },
   {
@@ -112,7 +159,9 @@
       "presence": "binary_sensor.presenza_terrazzo",
       "temperature": "",
       "humidity": "",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {},
     "path": "M 17,285 L 228,285 L 228,690 L 17,690 Z",
@@ -134,7 +183,9 @@
       "presence": "",
       "temperature": "sensor.awg_studio_temperatura",
       "humidity": "sensor.awg_studio_umidita",
-      "air_quality": "sensor.qualita_aria_studio"
+      "air_quality": "sensor.qualita_aria_studio",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 21.0,
@@ -174,7 +225,9 @@
       "presence": "",
       "temperature": "sensor.awg_bagnetto_temperatura",
       "humidity": "sensor.awg_bagnetto_umidita",
-      "air_quality": "sensor.qualita_aria_bagnetto"
+      "air_quality": "sensor.qualita_aria_bagnetto",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 22.0,
@@ -214,7 +267,9 @@
       "presence": "",
       "temperature": "",
       "humidity": "",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {},
     "path": "M 456,425 L 528,425 L 528,506 L 456,506 Z",
@@ -236,7 +291,9 @@
       "presence": "",
       "temperature": "sensor.awg_cucina_temperatura",
       "humidity": "sensor.awg_cucina_umidita",
-      "air_quality": "sensor.qualita_aria_cucina"
+      "air_quality": "sensor.qualita_aria_cucina",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 20.5,
@@ -261,6 +318,17 @@
         "w": 7,
         "h": 85
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "strip",
+        "x1": 255,
+        "y1": 681,
+        "x2": 405,
+        "y2": 681,
+        "width": 3.5,
+        "wash_direction": "up"
+      }
     ]
   },
   {
@@ -277,7 +345,9 @@
       "presence": "binary_sensor.sensore_movimento_ingresso",
       "temperature": "sensor.awg_ingresso_temperatura",
       "humidity": "sensor.awg_ingresso_umidita",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 21.2,
@@ -287,7 +357,16 @@
     "cx": 592,
     "cy": 446,
     "windows": [],
-    "shutters": []
+    "shutters": [],
+    "ambient_fixtures": [
+      {
+        "type": "spot",
+        "x": 641,
+        "y": 509,
+        "r": 5,
+        "halo_r": 20
+      }
+    ]
   },
   {
     "id": "ingresso_camere",
@@ -302,7 +381,9 @@
       "presence": "",
       "temperature": "",
       "humidity": "",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {},
     "path": "M 655,276 L 727,276 L 727,390 L 655,390 Z",
@@ -324,7 +405,9 @@
       "presence": "binary_sensor.presenza_bagno",
       "temperature": "sensor.awg_bagno_temperatura",
       "humidity": "sensor.awg_bagno_umidita",
-      "air_quality": "sensor.qualita_aria_bagno"
+      "air_quality": "sensor.qualita_aria_bagno",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 22.4,
@@ -349,6 +432,17 @@
         "w": 7,
         "h": 61
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "strip",
+        "x1": 825,
+        "y1": 376,
+        "x2": 880,
+        "y2": 376,
+        "width": 3.5,
+        "wash_direction": "up"
+      }
     ]
   },
   {
@@ -364,7 +458,9 @@
       "presence": "binary_sensor.esp32_multi_sensore_02_movimento",
       "temperature": "sensor.awg_balcone_temperatura",
       "humidity": "sensor.awg_esterno_umidita",
-      "air_quality": "sensor.qualita_aria_balcone"
+      "air_quality": "sensor.qualita_aria_balcone",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 16.5,
@@ -404,7 +500,9 @@
       "presence": "",
       "temperature": "sensor.awg_cameretta_temperatura",
       "humidity": "sensor.awg_cameretta_umidita",
-      "air_quality": "sensor.qualita_aria_cameretta"
+      "air_quality": "sensor.qualita_aria_cameretta",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 20.8,
@@ -481,7 +579,9 @@
           presence: r.entities.presence || "",
           temperature: r.entities.temperature || "",
           humidity: r.entities.humidity || "",
-          air_quality: r.entities.air_quality || ""
+          air_quality: r.entities.air_quality || "",
+          light: r.entities.light || "",
+          ambient_light: r.entities.ambient_light || ""
         }))
       };
     }
@@ -644,6 +744,17 @@
             animation: beacon-ripple 2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
             transform-origin: center;
           }
+          
+          .amb-light-group {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+          }
+          .amb-light-group:hover line {
+            stroke-width: 4.5px !important;
+          }
+          .amb-light-group:hover circle.amb-core {
+            r: 7px !important;
+          }
           .aq-led {
             transform-origin: center;
           }
@@ -730,6 +841,7 @@
         <image id="svg-walls-img" href="${BASE_IMAGE}" x="0" y="0" width="1024" height="711" preserveAspectRatio="none" style="pointer-events: none; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.65));" />
         <g id="g-room-bases"></g>
         <g id="g-room-fills"></g>
+        <g id="g-ambient-lights"></g>
         <g id="g-presence-glow"></g>
         <g id="g-windows"></g>
         <g id="g-shutters"></g>
@@ -740,6 +852,7 @@
 
       const gBases = this.shadowRoot.getElementById("g-room-bases");
       const gFills = this.shadowRoot.getElementById("g-room-fills");
+      const gAmb = this.shadowRoot.getElementById("g-ambient-lights");
       const gPresGlow = this.shadowRoot.getElementById("g-presence-glow");
       const gWins = this.shadowRoot.getElementById("g-windows");
       const gShut = this.shadowRoot.getElementById("g-shutters");
@@ -786,6 +899,113 @@
         presGlow.style.pointerEvents = "none";
         presGlow.style.transition = "opacity 0.45s ease";
         gPresGlow.appendChild(presGlow);
+
+        // 3b. Ambient Lights (Linear LED strips & Point spots along indicated fixtures)
+        const ambG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        ambG.setAttribute("id", `amb-${canonicalId}`);
+        ambG.setAttribute("class", "amb-light-group");
+        ambG.style.transition = "all 0.35s ease";
+        ambG.style.cursor = "pointer";
+
+        (r.ambient_fixtures || []).forEach((fix, idx) => {
+          if (fix.type === "strip") {
+            const stripG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            stripG.setAttribute("id", `amb-strip-g-${canonicalId}-${idx}`);
+
+            // Soft diffuse wash area on floor
+            const wash = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+            wash.setAttribute("id", `amb-wash-${canonicalId}-${idx}`);
+            const dy = fix.wash_direction === "up" ? -35 : 35;
+            const pts = `${fix.x1},${fix.y1} ${fix.x2},${fix.y2} ${fix.x2 + (fix.x2 > fix.x1 ? 15 : -15)},${fix.y2 + dy} ${fix.x1 - (fix.x2 > fix.x1 ? 15 : -15)},${fix.y1 + dy}`;
+            wash.setAttribute("points", pts);
+            wash.setAttribute("fill", "#fde047");
+            wash.setAttribute("opacity", "0");
+            wash.style.transition = "all 0.45s ease";
+            wash.style.pointerEvents = "none";
+            stripG.appendChild(wash);
+
+            // Base recessed architectural channel (subtle off state)
+            const baseLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            baseLine.setAttribute("x1", fix.x1);
+            baseLine.setAttribute("y1", fix.y1);
+            baseLine.setAttribute("x2", fix.x2);
+            baseLine.setAttribute("y2", fix.y2);
+            baseLine.setAttribute("stroke", "rgba(255, 255, 255, 0.12)");
+            baseLine.setAttribute("stroke-width", fix.width || 3.5);
+            baseLine.setAttribute("stroke-linecap", "round");
+            stripG.appendChild(baseLine);
+
+            // Glowing neon LED strip line
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("id", `amb-line-${canonicalId}-${idx}`);
+            line.setAttribute("x1", fix.x1);
+            line.setAttribute("y1", fix.y1);
+            line.setAttribute("x2", fix.x2);
+            line.setAttribute("y2", fix.y2);
+            line.setAttribute("stroke", "#fde047");
+            line.setAttribute("stroke-width", fix.width || 3.5);
+            line.setAttribute("stroke-linecap", "round");
+            line.setAttribute("opacity", "0");
+            line.setAttribute("filter", "url(#glow-ambient-strip)");
+            line.style.transition = "all 0.4s ease";
+            stripG.appendChild(line);
+
+            ambG.appendChild(stripG);
+          } else if (fix.type === "spot") {
+            const spotG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            spotG.setAttribute("id", `amb-spot-g-${canonicalId}-${idx}`);
+
+            // Soft radiant diffuse halo
+            const halo = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            halo.setAttribute("id", `amb-halo-${canonicalId}-${idx}`);
+            halo.setAttribute("cx", fix.x);
+            halo.setAttribute("cy", fix.y);
+            halo.setAttribute("r", fix.halo_r || 22);
+            halo.setAttribute("fill", "#fde047");
+            halo.setAttribute("opacity", "0");
+            halo.style.transition = "all 0.45s ease";
+            halo.style.pointerEvents = "none";
+            spotG.appendChild(halo);
+
+            // Base recessed fixture ring
+            const baseCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            baseCircle.setAttribute("cx", fix.x);
+            baseCircle.setAttribute("cy", fix.y);
+            baseCircle.setAttribute("r", fix.r || 5);
+            baseCircle.setAttribute("fill", "rgba(255, 255, 255, 0.05)");
+            baseCircle.setAttribute("stroke", "rgba(255, 255, 255, 0.2)");
+            baseCircle.setAttribute("stroke-width", "1.2");
+            spotG.appendChild(baseCircle);
+
+            // Glowing core spot lamp
+            const core = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            core.setAttribute("id", `amb-core-${canonicalId}-${idx}`);
+            core.setAttribute("class", "amb-core");
+            core.setAttribute("cx", fix.x);
+            core.setAttribute("cy", fix.y);
+            core.setAttribute("r", fix.r || 5);
+            core.setAttribute("fill", "#fef08a");
+            core.setAttribute("stroke", "#facc15");
+            core.setAttribute("stroke-width", "1.5");
+            core.setAttribute("opacity", "0");
+            core.setAttribute("filter", "url(#glow-ambient-spot)");
+            core.style.transition = "all 0.4s ease";
+            spotG.appendChild(core);
+
+            ambG.appendChild(spotG);
+          }
+        });
+
+        // Click to toggle ambient light
+        ambG.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const ambId = room.ambient_light || room.secondary_light || room.light_2;
+          if (ambId && this._hass) {
+            this._hass.callService("light", "toggle", { entity_id: ambId });
+          }
+        });
+
+        gAmb.appendChild(ambG);
 
         // 4. Windows (Frosted architectural glass + cyan neon glow)
         (r.windows || []).forEach((win, idx) => {
@@ -1017,6 +1237,79 @@
           presGlow.setAttribute("opacity", isPresent ? "1" : "0");
         }
 
+        // Ambient Light state (support ambient_light, secondary_light, light_2)
+        const ambEntId = room.ambient_light || room.secondary_light || room.light_2 || (rDef.entities && rDef.entities.ambient_light) || "";
+        const ambEntity = (ambEntId && this._hass) ? this._hass.states[ambEntId] : null;
+        const isAmbOn = ambEntity && ambEntity.state === "on";
+
+        const ambGroup = this.shadowRoot.getElementById(`amb-${canonicalId}`) || this.shadowRoot.getElementById(`amb-${room.id}`);
+        if (ambGroup) {
+          if (!ambEntId) {
+            ambGroup.style.display = "none";
+          } else {
+            ambGroup.style.display = "block";
+            let lightColor = "#fde047";
+            let coreColor = "#fef08a";
+            let washColor = "rgba(253, 224, 71, 0.22)";
+            let haloColor = "rgba(253, 224, 71, 0.35)";
+            let brightnessFactor = 1.0;
+
+            if (ambEntity && ambEntity.attributes) {
+              const attrs = ambEntity.attributes;
+              if (attrs.rgb_color && Array.isArray(attrs.rgb_color)) {
+                const [cr, cg, cb] = attrs.rgb_color;
+                lightColor = `rgb(${cr}, ${cg}, ${cb})`;
+                coreColor = `rgb(${Math.min(255, cr + 40)}, ${Math.min(255, cg + 40)}, ${Math.min(255, cb + 40)})`;
+                washColor = `rgba(${cr}, ${cg}, ${cb}, 0.25)`;
+                haloColor = `rgba(${cr}, ${cg}, ${cb}, 0.4)`;
+              }
+              if (attrs.brightness !== undefined) {
+                brightnessFactor = Math.max(0.35, attrs.brightness / 255);
+              }
+            }
+
+            (rDef.ambient_fixtures || []).forEach((fix, idx) => {
+              if (fix.type === "strip") {
+                const line = this.shadowRoot.getElementById(`amb-line-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-line-${room.id}-${idx}`);
+                const wash = this.shadowRoot.getElementById(`amb-wash-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-wash-${room.id}-${idx}`);
+                if (line) {
+                  line.setAttribute("stroke", lightColor);
+                  line.setAttribute("opacity", isAmbOn ? (0.95 * brightnessFactor) : "0");
+                }
+                if (wash) {
+                  wash.setAttribute("fill", washColor);
+                  wash.setAttribute("opacity", isAmbOn ? (0.45 * brightnessFactor) : "0");
+                }
+              } else if (fix.type === "spot") {
+                const core = this.shadowRoot.getElementById(`amb-core-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-core-${room.id}-${idx}`);
+                const halo = this.shadowRoot.getElementById(`amb-halo-${canonicalId}-${idx}`) || this.shadowRoot.getElementById(`amb-halo-${room.id}-${idx}`);
+                if (core) {
+                  core.setAttribute("fill", coreColor);
+                  core.setAttribute("stroke", lightColor);
+                  core.setAttribute("opacity", isAmbOn ? (1 * brightnessFactor) : "0");
+                }
+                if (halo) {
+                  halo.setAttribute("fill", haloColor);
+                  halo.setAttribute("opacity", isAmbOn ? (0.6 * brightnessFactor) : "0");
+                }
+              }
+            });
+          }
+        }
+
+        // Primary Room Light state (light)
+        const mainLightId = room.light || room.primary_light || room.main_light || (rDef.entities && rDef.entities.light) || "";
+        const mainLightEntity = (mainLightId && this._hass) ? this._hass.states[mainLightId] : null;
+        const isMainLightOn = mainLightEntity && mainLightEntity.state === "on";
+        const baseFloorPoly = this.shadowRoot.querySelector(`#g-room-bases path[d="${rDef.path}"]`);
+        if (baseFloorPoly) {
+          if (isMainLightOn) {
+            baseFloorPoly.setAttribute("fill", "rgba(254, 240, 138, 0.08)");
+          } else {
+            baseFloorPoly.setAttribute("fill", "rgba(255, 255, 255, 0.01)");
+          }
+        }
+
         // Climate data
         const tempState = (room.temperature && this._hass.states[room.temperature]) ? this._hass.states[room.temperature].state : null;
         const humState = (room.humidity && this._hass.states[room.humidity]) ? this._hass.states[room.humidity].state : null;
@@ -1180,7 +1473,7 @@
     }
 
     _handleRoomClick(room) {
-      const targetEntity = room.presence || room.window || room.shutter || room.temperature;
+      const targetEntity = room.light || room.ambient_light || room.secondary_light || room.presence || room.window || room.shutter || room.temperature;
       if (targetEntity) {
         const event = new CustomEvent("hass-more-info", {
           bubbles: true,

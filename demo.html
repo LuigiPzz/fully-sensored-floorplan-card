@@ -167,7 +167,9 @@
       "presence": "",
       "temperature": "sensor.awg_salone_temperatura",
       "humidity": "sensor.awg_salone_umidita",
-      "air_quality": "sensor.purificatore_xiaomi_pm25"
+      "air_quality": "sensor.purificatore_xiaomi_pm25",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 21.8,
@@ -192,6 +194,33 @@
         "w": 7,
         "h": 171
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "spot",
+        "x": 228,
+        "y": 32,
+        "r": 5.5,
+        "halo_r": 24
+      },
+      {
+        "type": "strip",
+        "x1": 270,
+        "y1": 32,
+        "x2": 460,
+        "y2": 32,
+        "width": 3.5,
+        "wash_direction": "down"
+      },
+      {
+        "type": "strip",
+        "x1": 270,
+        "y1": 252,
+        "x2": 452,
+        "y2": 252,
+        "width": 3.5,
+        "wash_direction": "up"
+      }
     ]
   },
   {
@@ -208,7 +237,9 @@
       "presence": "",
       "temperature": "sensor.awg_camera_da_letto_temperatura",
       "humidity": "sensor.awg_camera_da_letto_umidita",
-      "air_quality": "sensor.qualita_aria_camera_da_letto"
+      "air_quality": "sensor.qualita_aria_camera_da_letto",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 20.2,
@@ -233,6 +264,22 @@
         "w": 7,
         "h": 140
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "spot",
+        "x": 774,
+        "y": 248,
+        "r": 5,
+        "halo_r": 20
+      },
+      {
+        "type": "spot",
+        "x": 940,
+        "y": 250,
+        "r": 5,
+        "halo_r": 20
+      }
     ]
   },
   {
@@ -250,7 +297,9 @@
       "presence": "binary_sensor.presenza_terrazzo",
       "temperature": "",
       "humidity": "",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {},
     "path": "M 17,285 L 228,285 L 228,690 L 17,690 Z",
@@ -272,7 +321,9 @@
       "presence": "",
       "temperature": "sensor.awg_studio_temperatura",
       "humidity": "sensor.awg_studio_umidita",
-      "air_quality": "sensor.qualita_aria_studio"
+      "air_quality": "sensor.qualita_aria_studio",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 21.0,
@@ -312,7 +363,9 @@
       "presence": "",
       "temperature": "sensor.awg_bagnetto_temperatura",
       "humidity": "sensor.awg_bagnetto_umidita",
-      "air_quality": "sensor.qualita_aria_bagnetto"
+      "air_quality": "sensor.qualita_aria_bagnetto",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 22.0,
@@ -352,7 +405,9 @@
       "presence": "",
       "temperature": "",
       "humidity": "",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {},
     "path": "M 456,425 L 528,425 L 528,506 L 456,506 Z",
@@ -374,7 +429,9 @@
       "presence": "",
       "temperature": "sensor.awg_cucina_temperatura",
       "humidity": "sensor.awg_cucina_umidita",
-      "air_quality": "sensor.qualita_aria_cucina"
+      "air_quality": "sensor.qualita_aria_cucina",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 20.5,
@@ -399,6 +456,17 @@
         "w": 7,
         "h": 85
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "strip",
+        "x1": 255,
+        "y1": 681,
+        "x2": 405,
+        "y2": 681,
+        "width": 3.5,
+        "wash_direction": "up"
+      }
     ]
   },
   {
@@ -415,7 +483,9 @@
       "presence": "binary_sensor.sensore_movimento_ingresso",
       "temperature": "sensor.awg_ingresso_temperatura",
       "humidity": "sensor.awg_ingresso_umidita",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 21.2,
@@ -425,7 +495,16 @@
     "cx": 592,
     "cy": 446,
     "windows": [],
-    "shutters": []
+    "shutters": [],
+    "ambient_fixtures": [
+      {
+        "type": "spot",
+        "x": 641,
+        "y": 509,
+        "r": 5,
+        "halo_r": 20
+      }
+    ]
   },
   {
     "id": "ingresso_camere",
@@ -440,7 +519,9 @@
       "presence": "",
       "temperature": "",
       "humidity": "",
-      "air_quality": ""
+      "air_quality": "",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {},
     "path": "M 655,276 L 727,276 L 727,390 L 655,390 Z",
@@ -462,7 +543,9 @@
       "presence": "binary_sensor.presenza_bagno",
       "temperature": "sensor.awg_bagno_temperatura",
       "humidity": "sensor.awg_bagno_umidita",
-      "air_quality": "sensor.qualita_aria_bagno"
+      "air_quality": "sensor.qualita_aria_bagno",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 22.4,
@@ -487,6 +570,17 @@
         "w": 7,
         "h": 61
       }
+    ],
+    "ambient_fixtures": [
+      {
+        "type": "strip",
+        "x1": 825,
+        "y1": 376,
+        "x2": 880,
+        "y2": 376,
+        "width": 3.5,
+        "wash_direction": "up"
+      }
     ]
   },
   {
@@ -502,7 +596,9 @@
       "presence": "binary_sensor.esp32_multi_sensore_02_movimento",
       "temperature": "sensor.awg_balcone_temperatura",
       "humidity": "sensor.awg_esterno_umidita",
-      "air_quality": "sensor.qualita_aria_balcone"
+      "air_quality": "sensor.qualita_aria_balcone",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 16.5,
@@ -542,7 +638,9 @@
       "presence": "",
       "temperature": "sensor.awg_cameretta_temperatura",
       "humidity": "sensor.awg_cameretta_umidita",
-      "air_quality": "sensor.qualita_aria_cameretta"
+      "air_quality": "sensor.qualita_aria_cameretta",
+      "light": "",
+      "ambient_light": ""
     },
     "env_defaults": {
       "temp": 20.8,
@@ -590,7 +688,16 @@
       if (e.temperature) mockHass.states[e.temperature] = { state: (r.env_defaults?.temp || 21.0).toString() };
       if (e.humidity) mockHass.states[e.humidity] = { state: (r.env_defaults?.humidity || 50).toString() };
       if (e.air_quality) mockHass.states[e.air_quality] = { state: (r.env_defaults?.air_quality || "12").toString() };
+      if (e.light) mockHass.states[e.light] = { state: "off", attributes: { brightness: 255 } };
+      if (e.ambient_light) mockHass.states[e.ambient_light] = { state: "off", attributes: { brightness: 255, rgb_color: [253, 224, 71] } };
     });
+
+    // Provide default sample ambient lights for rooms that have ambient fixtures
+    mockHass.states["light.salone_ambientale"] = { state: "on", attributes: { brightness: 240, rgb_color: [253, 224, 71] } };
+    mockHass.states["light.camera_ambientale"] = { state: "on", attributes: { brightness: 220, rgb_color: [254, 240, 138] } };
+    mockHass.states["light.cucina_ambientale"] = { state: "on", attributes: { brightness: 255, rgb_color: [253, 224, 71] } };
+    mockHass.states["light.bagno_ambientale"] = { state: "off", attributes: { brightness: 200, rgb_color: [253, 224, 71] } };
+    mockHass.states["light.ingresso_ambientale"] = { state: "off", attributes: { brightness: 200, rgb_color: [253, 224, 71] } };
 
     const card = document.getElementById("my-card");
     let showClimate = true;
@@ -614,7 +721,9 @@
           presence: r.entities.presence || "",
           temperature: r.entities.temperature || "",
           humidity: r.entities.humidity || "",
-          air_quality: r.entities.air_quality || ""
+          air_quality: r.entities.air_quality || "",
+          light: r.entities.light || "",
+          ambient_light: r.id === "salone" ? "light.salone_ambientale" : (r.id === "camera_da_letto" ? "light.camera_ambientale" : (r.id === "cucina" ? "light.cucina_ambientale" : (r.id === "bagno" ? "light.bagno_ambientale" : (r.id === "ingresso" ? "light.ingresso_ambientale" : ""))))
         }))
       });
       card.hass = mockHass;
